@@ -35,34 +35,26 @@ public class Teacher implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "teacher_id")
     private Integer teacherId;
-    @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
-    @Basic(optional = false)
     @Column(name = "last_name")
     private String lastName;
-    @Basic(optional = false)
     @Column(name = "city")
     private String city;
-    @Basic(optional = false)
     @Column(name = "street")
     private String street;
-    @Basic(optional = false)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
     @Column(name = "username")
     private String username;
-    @Basic(optional = false)
     @Column(name = "password")
     private String password;
-    @Column(name = "created_date")
+    @Column(name = "created_date", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date")
+    @Column(name = "modified_date", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @Column(name = "status")
@@ -185,28 +177,8 @@ public class Teacher implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (teacherId != null ? teacherId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Teacher)) {
-            return false;
-        }
-        Teacher other = (Teacher) object;
-        if ((this.teacherId == null && other.teacherId != null) || (this.teacherId != null && !this.teacherId.equals(other.teacherId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "com.codelabs.entity.Teacher[ teacherId=" + teacherId + " ]";
     }
-    
+
 }
