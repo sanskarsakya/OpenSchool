@@ -6,7 +6,7 @@
         <artifactId>herokuMultiModule</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>Parent-Module</artifactId>
+    <artifactId>Student-Module</artifactId>
     <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>            
-        </dependency>    
+        </dependency>            
         <dependency>
             <groupId>com.code-labs</groupId>
             <artifactId>Entity-Module</artifactId>      
@@ -66,7 +66,7 @@
             <groupId>com.code-labs</groupId>
             <artifactId>Core-Module</artifactId>      
             <version>1.0</version>      
-        </dependency>     
+        </dependency>    
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>            
@@ -74,6 +74,6 @@
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>            
-        </dependency>          
+        </dependency>
     </dependencies>
 </project>

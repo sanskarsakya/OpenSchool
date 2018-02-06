@@ -3,25 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs.parent.DTO;
+package com.codelabs.student.DTO;
 
+import com.codelabs.entity.StudentStatus;
+import com.codelabs.entity._Class;
 import java.util.Date;
 import lombok.Data;
 
 /**
  *
- * @author kamal
+ * @author koirala
  */
 @Data
-public class ParentDTO {
+public class StudentDTO {
 
-    private Integer parentId;
+    private Integer studentId;
     private String firstName;
     private String lastName;
+    private String email;
     private String contactNo;
+    private String username;
+    private String password;
     private String street;
     private String city;
     private Date createdDate;
-    private Boolean status;
-    private String username;
+    private _Class classId;
+    private StudentStatus statusId;
 }
