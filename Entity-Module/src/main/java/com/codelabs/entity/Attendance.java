@@ -37,7 +37,7 @@ public class Attendance implements Serializable {
     @Basic(optional = false)
     @Column(name = "attendance_id")
     private Integer attendanceId;
-    @Column(name = "attendance_date")
+    @Column(name = "attendance_date", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date attendanceDate;
     @Column(name = "attendance_status")
@@ -109,5 +109,5 @@ public class Attendance implements Serializable {
     public String toString() {
         return "com.codelabs.entity.Attendance[ attendanceId=" + attendanceId + " ]";
     }
-    
+
 }

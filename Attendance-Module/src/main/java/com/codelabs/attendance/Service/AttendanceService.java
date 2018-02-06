@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs.exam.Service;
+package com.codelabs.attendance.Service;
 
+import com.codelabs.attendance.DTO.AttendanceDTO;
 import com.codelabs.core.Service.GenericService;
-import com.codelabs.exam.DTO.ExamDTO;
 
 /**
  *
- * @author nishesh
+ * @author Prachin
  */
-public interface ExamService extends GenericService<ExamDTO>{
+public interface AttendanceService extends GenericService<AttendanceDTO> {
     
 }
