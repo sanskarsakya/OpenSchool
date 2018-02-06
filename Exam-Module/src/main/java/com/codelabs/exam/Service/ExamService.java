@@ -10,7 +10,7 @@ import com.codelabs.exam.DTO.ExamDTO;
 
 /**
  *
- * @author Prachin
+ * @author nishesh
  */
 public interface ExamService extends GenericService<ExamDTO>{
     
