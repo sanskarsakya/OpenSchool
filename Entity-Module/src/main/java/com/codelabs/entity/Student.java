@@ -37,37 +37,28 @@ public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "student_id")
     private Integer studentId;
-    @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
-    @Basic(optional = false)
     @Column(name = "last_name")
     private String lastName;
-    @Basic(optional = false)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
     @Column(name = "contact_no")
     private String contactNo;
-    @Basic(optional = false)
     @Column(name = "username")
     private String username;
-    @Basic(optional = false)
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
     @Column(name = "street")
     private String street;
-    @Basic(optional = false)
     @Column(name = "city")
     private String city;
-    @Column(name = "created_date")
+    @Column(name = "created_date", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date")
+    @Column(name = "modified_date", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
@@ -254,5 +245,5 @@ public class Student implements Serializable {
     public String toString() {
         return "com.codelabs.entity.Student[ studentId=" + studentId + " ]";
     }
-    
+
 }

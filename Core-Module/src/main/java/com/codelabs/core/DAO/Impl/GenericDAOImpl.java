@@ -77,7 +77,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     @Override
     public List<T> getAll() {
         session = sessionFactory.openSession();
-        Criteria criteria = session.createCriteria(paramClass);
+        Criteria criteria = session.createCriteria(paramClass).setMaxResults(10);
         List<T> list = criteria.list();
         session.close();
         return list;

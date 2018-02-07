@@ -27,6 +27,6 @@ public class StudentDTO {
     private String street;
     private String city;
     private Date createdDate;
-    private _Class classId;
-    private StudentStatus statusId;
+    private Integer classId;
+    private Integer statusId;
 }
