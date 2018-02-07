@@ -18,6 +18,6 @@ public class AttendanceDTO {
     private Integer attendanceId;
     private Date attendanceDate;
     private Boolean attendanceStatus;
-    private StudentDTO student;
+//    private StudentDTO student;
 
 }

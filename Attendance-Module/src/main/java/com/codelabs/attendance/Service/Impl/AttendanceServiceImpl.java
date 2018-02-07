@@ -47,17 +47,22 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public void update(int id, AttendanceDTO t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Attendance attendance = new ModelMapper().map(t, Attendance.class);
+        aDAO.update(attendance);
     }
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return aDAO.delete(id);
     }
 
     @Override
     public AttendanceDTO getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Attendance a = aDAO.getById(id);
+        if (a == null) {
+            return null;
+        }
+        return new ModelMapper().map(a, AttendanceDTO.class);
     }
 
 }
