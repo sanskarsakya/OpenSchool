@@ -35,19 +35,17 @@ public class Exam implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "exam_id")
     private Integer examId;
-    @Basic(optional = false)
     @Column(name = "exam_title")
     private String examTitle;
     @Column(name = "exam_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date examDate;
-    @Column(name = "created_date")
+    @Column(name = "created_date", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date")
+    @Column(name = "modified_date", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @Column(name = "status")
@@ -147,5 +145,5 @@ public class Exam implements Serializable {
     public String toString() {
         return "com.codelabs.entity.Exam[ examId=" + examId + " ]";
     }
-    
+
 }

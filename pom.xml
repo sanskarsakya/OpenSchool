@@ -13,6 +13,8 @@
         <module>Parent-Module</module>
         <module>Student-Module</module>
         <module>_Class-Module</module>
+        <module>Exam-Module</module>
+        <module>Attendance-Module</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -69,7 +69,6 @@
             <artifactId>Teacher-Module</artifactId>            
             <version>1.0</version>
         </dependency>           
-
         <dependency>
             <groupId>com.code-labs</groupId>
             <artifactId>_Class-Module</artifactId>            
@@ -83,6 +82,11 @@
         <dependency>
             <groupId>com.code-labs</groupId>
             <artifactId>Student-Module</artifactId>            
+            <version>1.0</version>
+        </dependency>           
+        <dependency>
+            <groupId>com.code-labs</groupId>
+            <artifactId>Exam-Module</artifactId>            
             <version>1.0</version>
         </dependency>           
     </dependencies>
