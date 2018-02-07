@@ -12,6 +12,7 @@
         <module>Teacher-Module</module>
         <module>Parent-Module</module>
         <module>Student-Module</module>
+        <module>_Class-Module</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -69,26 +69,22 @@
             <artifactId>Teacher-Module</artifactId>            
             <version>1.0</version>
         </dependency>           
-        <!--        <dependency>
-            <groupId>com.code-labs</groupId>
-            <artifactId>Subject-Module</artifactId>            
-            <version>1.0</version>
-        </dependency> 
+
         <dependency>
             <groupId>com.code-labs</groupId>
-            <artifactId>Class-Module</artifactId>            
+            <artifactId>_Class-Module</artifactId>            
             <version>1.0</version>
-        </dependency>                 
+        </dependency>            
         <dependency>
             <groupId>com.code-labs</groupId>
             <artifactId>Parent-Module</artifactId>            
             <version>1.0</version>
-        </dependency>           -->
-        <!--        <dependency>
+        </dependency>           
+        <dependency>
             <groupId>com.code-labs</groupId>
-            <artifactId>Status-Module</artifactId>            
+            <artifactId>Student-Module</artifactId>            
             <version>1.0</version>
-        </dependency>           -->
+        </dependency>           
     </dependencies>
 
     <build>

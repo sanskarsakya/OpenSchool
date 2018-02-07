@@ -32,7 +32,6 @@ public class ParentServiceImpl implements ParentService {
             ModelMapper mapper = new ModelMapper();
             ParentDTO pDTO = mapper.map(parent, ParentDTO.class);
             parentlist.add(pDTO);
-
         }
         return parentlist;
     }
@@ -87,8 +86,8 @@ public class ParentServiceImpl implements ParentService {
         return new ModelMapper().map(p, ParentDTO.class);
     }
 
-@Override
-        public boolean delete(int id) {
+    @Override
+    public boolean delete(int id) {
         return pd.delete(id);
     }
 

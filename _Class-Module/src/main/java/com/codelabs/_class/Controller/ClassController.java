@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs.parent.Controller;
+package com.codelabs._class.Controller;
 
-import com.codelabs.parent.DTO.ParentDTO;
-import com.codelabs.parent.Service.ParentService;
+import com.codelabs._class.DTO._ClassDTO;
+import com.codelabs._class.Service.ClassService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,61 +21,50 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
- * @author kamal
+ * @author koirala
  */
 @Controller
 @CrossOrigin
-@RequestMapping(value = "/parents")
-public class ParentController {
+@RequestMapping(value = "/classes")
+public class ClassController {
 
-    /*
-    parents->get->getAll
-    parents->post->insert
-    parents/->patch->update
-    parents/{id}->delete->delete
-    parents/{id}->get->getById
-    
-     */
     @Autowired
-    ParentService ps;
+    private ClassService cService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<ParentDTO> getAll() {
-        return ps.getAll();
-
+    public List<_ClassDTO> getAll() {
+        return cService.getAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ParentDTO save(@RequestBody ParentDTO pd) {
-        return ps.insert(pd);
+    public _ClassDTO insert(@RequestBody _ClassDTO cDTO) {
+        return cService.insert(cDTO);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public String update(@PathVariable("id") int id,@RequestBody ParentDTO pd) {
-        pd.setParentId(id);
-        ps.update(id, pd);
-        return "success";
-
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<ParentDTO> getById(@PathVariable("id") int id) {
-        ParentDTO parent = ps.getById(id);
-        if (parent == null) {
-            return new ResponseEntity<ParentDTO>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<ParentDTO>(parent, HttpStatus.OK);
+    public String update(@PathVariable("id") int id, @RequestBody _ClassDTO cDTO) {
+        cDTO.setClassId(id);
+        cService.update(id, cDTO);
+        return "{\"response\":\"success\"}";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable("id") int id) {
-        ps.delete(id);
-        return "{response:\"success\"}";
+        cService.delete(id);
+        return "{\"response\":\"success\"}";
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<_ClassDTO> getById(@PathVariable("id") int id) {
+        _ClassDTO cDTO = cService.getById(id);
+        if (cDTO == null) {
+            return new ResponseEntity<_ClassDTO>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<_ClassDTO>(cDTO, HttpStatus.OK);
+    }
 }
