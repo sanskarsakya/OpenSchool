@@ -5,6 +5,7 @@
  */
 package com.codelabs.attendance.DTO;
 
+import com.codelabs.student.DTO.StudentDTO;
 import java.util.Date;
 import lombok.Data;
 
@@ -18,6 +19,6 @@ public class AttendanceDTO {
     private Integer attendanceId;
     private Date attendanceDate;
     private Boolean attendanceStatus;
-//    private StudentDTO student;
+    private StudentDTO student;
 
 }
