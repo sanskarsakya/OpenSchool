@@ -52,9 +52,7 @@ public class _Class implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
     private List<Student> studentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
-    private List<Routine> routineList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
-    private List<ClassSubject> classSubjectList;
+    private List<Exam> examList;
 
     public _Class() {
     }
@@ -116,20 +114,12 @@ public class _Class implements Serializable {
         this.studentList = studentList;
     }
 
-    public List<Routine> getRoutineList() {
-        return routineList;
+    public List<Exam> getExamList() {
+        return examList;
     }
 
-    public void setRoutineList(List<Routine> routineList) {
-        this.routineList = routineList;
-    }
-
-    public List<ClassSubject> getClassSubjectList() {
-        return classSubjectList;
-    }
-
-    public void setClassSubjectList(List<ClassSubject> classSubjectList) {
-        this.classSubjectList = classSubjectList;
+    public void setExamList(List<Exam> examList) {
+        this.examList = examList;
     }
 
     @Override

@@ -32,10 +32,10 @@ public class StudentStatus implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+    @Basic(optional = false)
     @Column(name = "student_status_id")
     private Integer studentStatusId;
-
+    @Basic(optional = false)
     @Column(name = "status")
     private String status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
@@ -77,7 +77,26 @@ public class StudentStatus implements Serializable {
         this.studentList = studentList;
     }
 
-  
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (studentStatusId != null ? studentStatusId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof StudentStatus)) {
+            return false;
+        }
+        StudentStatus other = (StudentStatus) object;
+        if ((this.studentStatusId == null && other.studentStatusId != null) || (this.studentStatusId != null && !this.studentStatusId.equals(other.studentStatusId))) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return "com.codelabs.entity.StudentStatus[ studentStatusId=" + studentStatusId + " ]";

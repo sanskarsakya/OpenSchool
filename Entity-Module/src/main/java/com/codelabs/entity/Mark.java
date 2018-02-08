@@ -23,23 +23,20 @@ import javax.persistence.Table;
  * @author puzansakya
  */
 @Entity
-@Table(name = "tbl_reports")
+@Table(name = "tbl_marks")
 @NamedQueries({
-    @NamedQuery(name = "Report.findAll", query = "SELECT r FROM Report r")})
-public class Report implements Serializable {
+    @NamedQuery(name = "Mark.findAll", query = "SELECT m FROM Mark m")})
+public class Mark implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "report_id")
-    private Integer reportId;
+    @Column(name = "mark_id")
+    private Integer markId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "marks_obtained")
-    private Double marksObtained;
-    @JoinColumn(name = "class_subject_id", referencedColumnName = "class_subject_id")
-    @ManyToOne(optional = false)
-    private ClassSubject classSubjectId;
+    @Column(name = "obtained_mark")
+    private Double obtainedMark;
     @JoinColumn(name = "exam_id", referencedColumnName = "exam_id")
     @ManyToOne(optional = false)
     private Exam examId;
@@ -47,35 +44,27 @@ public class Report implements Serializable {
     @ManyToOne(optional = false)
     private Student studentId;
 
-    public Report() {
+    public Mark() {
     }
 
-    public Report(Integer reportId) {
-        this.reportId = reportId;
+    public Mark(Integer markId) {
+        this.markId = markId;
     }
 
-    public Integer getReportId() {
-        return reportId;
+    public Integer getMarkId() {
+        return markId;
     }
 
-    public void setReportId(Integer reportId) {
-        this.reportId = reportId;
+    public void setMarkId(Integer markId) {
+        this.markId = markId;
     }
 
-    public Double getMarksObtained() {
-        return marksObtained;
+    public Double getObtainedMark() {
+        return obtainedMark;
     }
 
-    public void setMarksObtained(Double marksObtained) {
-        this.marksObtained = marksObtained;
-    }
-
-    public ClassSubject getClassSubjectId() {
-        return classSubjectId;
-    }
-
-    public void setClassSubjectId(ClassSubject classSubjectId) {
-        this.classSubjectId = classSubjectId;
+    public void setObtainedMark(Double obtainedMark) {
+        this.obtainedMark = obtainedMark;
     }
 
     public Exam getExamId() {
@@ -97,18 +86,18 @@ public class Report implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (reportId != null ? reportId.hashCode() : 0);
+        hash += (markId != null ? markId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Report)) {
+        if (!(object instanceof Mark)) {
             return false;
         }
-        Report other = (Report) object;
-        if ((this.reportId == null && other.reportId != null) || (this.reportId != null && !this.reportId.equals(other.reportId))) {
+        Mark other = (Mark) object;
+        if ((this.markId == null && other.markId != null) || (this.markId != null && !this.markId.equals(other.markId))) {
             return false;
         }
         return true;
@@ -116,7 +105,7 @@ public class Report implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codelabs.entity.Report[ reportId=" + reportId + " ]";
+        return "com.codelabs.entity.Mark[ markId=" + markId + " ]";
     }
     
 }

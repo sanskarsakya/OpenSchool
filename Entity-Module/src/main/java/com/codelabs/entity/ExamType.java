@@ -7,16 +7,17 @@ package com.codelabs.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,17 +27,20 @@ import javax.persistence.TemporalType;
  * @author puzansakya
  */
 @Entity
-@Table(name = "tbl_routines")
+@Table(name = "tbl_exam_types")
 @NamedQueries({
-    @NamedQuery(name = "Routine.findAll", query = "SELECT r FROM Routine r")})
-public class Routine implements Serializable {
+    @NamedQuery(name = "ExamType.findAll", query = "SELECT e FROM ExamType e")})
+public class ExamType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "routine_id")
-    private Integer routineId;
+    @Column(name = "exam_type_id")
+    private Integer examTypeId;
+    @Basic(optional = false)
+    @Column(name = "exam_type")
+    private String examType;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
@@ -45,32 +49,35 @@ public class Routine implements Serializable {
     private Date modifiedDate;
     @Column(name = "status")
     private Boolean status;
-    @JoinColumn(name = "class_id", referencedColumnName = "class_id")
-    @ManyToOne(optional = false)
-    private _Class classId;
-    @JoinColumn(name = "subject_id", referencedColumnName = "subject_id")
-    @ManyToOne(optional = false)
-    private Subject subjectId;
-    @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
-    @ManyToOne(optional = false)
-    private Teacher teacherId;
-    @JoinColumn(name = "time_id", referencedColumnName = "time_id")
-    @ManyToOne(optional = false)
-    private Time timeId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "examTypeId")
+    private List<Exam> examList;
 
-    public Routine() {
+    public ExamType() {
     }
 
-    public Routine(Integer routineId) {
-        this.routineId = routineId;
+    public ExamType(Integer examTypeId) {
+        this.examTypeId = examTypeId;
     }
 
-    public Integer getRoutineId() {
-        return routineId;
+    public ExamType(Integer examTypeId, String examType) {
+        this.examTypeId = examTypeId;
+        this.examType = examType;
     }
 
-    public void setRoutineId(Integer routineId) {
-        this.routineId = routineId;
+    public Integer getExamTypeId() {
+        return examTypeId;
+    }
+
+    public void setExamTypeId(Integer examTypeId) {
+        this.examTypeId = examTypeId;
+    }
+
+    public String getExamType() {
+        return examType;
+    }
+
+    public void setExamType(String examType) {
+        this.examType = examType;
     }
 
     public Date getCreatedDate() {
@@ -97,53 +104,29 @@ public class Routine implements Serializable {
         this.status = status;
     }
 
-    public _Class getClassId() {
-        return classId;
+    public List<Exam> getExamList() {
+        return examList;
     }
 
-    public void setClassId(_Class classId) {
-        this.classId = classId;
-    }
-
-    public Subject getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Subject subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public Teacher getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Teacher teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public Time getTimeId() {
-        return timeId;
-    }
-
-    public void setTimeId(Time timeId) {
-        this.timeId = timeId;
+    public void setExamList(List<Exam> examList) {
+        this.examList = examList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (routineId != null ? routineId.hashCode() : 0);
+        hash += (examTypeId != null ? examTypeId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Routine)) {
+        if (!(object instanceof ExamType)) {
             return false;
         }
-        Routine other = (Routine) object;
-        if ((this.routineId == null && other.routineId != null) || (this.routineId != null && !this.routineId.equals(other.routineId))) {
+        ExamType other = (ExamType) object;
+        if ((this.examTypeId == null && other.examTypeId != null) || (this.examTypeId != null && !this.examTypeId.equals(other.examTypeId))) {
             return false;
         }
         return true;
@@ -151,7 +134,7 @@ public class Routine implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codelabs.entity.Routine[ routineId=" + routineId + " ]";
+        return "com.codelabs.entity.ExamType[ examTypeId=" + examTypeId + " ]";
     }
     
 }

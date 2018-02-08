@@ -37,42 +37,47 @@ public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "student_id")
     private Integer studentId;
+    @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
+    @Basic(optional = false)
     @Column(name = "last_name")
     private String lastName;
+    @Basic(optional = false)
     @Column(name = "email")
     private String email;
+    @Basic(optional = false)
     @Column(name = "contact_no")
     private String contactNo;
+    @Basic(optional = false)
     @Column(name = "username")
     private String username;
+    @Basic(optional = false)
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
     @Column(name = "street")
     private String street;
+    @Basic(optional = false)
     @Column(name = "city")
     private String city;
-    @Column(name = "created_date", insertable = false)
+    @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date", nullable = true)
+    @Column(name = "modified_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
-    private List<Attendance> attendanceList;
+    private List<Mark> markList;
     @JoinColumn(name = "class_id", referencedColumnName = "class_id")
     @ManyToOne(optional = false)
     private _Class classId;
     @JoinColumn(name = "status_id", referencedColumnName = "student_status_id")
     @ManyToOne(optional = false)
     private StudentStatus statusId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private List<ParentRelationStudent> parentRelationStudentList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
-    private List<Report> reportList;
 
     public Student() {
     }
@@ -181,12 +186,12 @@ public class Student implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-    public List<Attendance> getAttendanceList() {
-        return attendanceList;
+    public List<Mark> getMarkList() {
+        return markList;
     }
 
-    public void setAttendanceList(List<Attendance> attendanceList) {
-        this.attendanceList = attendanceList;
+    public void setMarkList(List<Mark> markList) {
+        this.markList = markList;
     }
 
     public _Class getClassId() {
@@ -203,22 +208,6 @@ public class Student implements Serializable {
 
     public void setStatusId(StudentStatus statusId) {
         this.statusId = statusId;
-    }
-
-    public List<ParentRelationStudent> getParentRelationStudentList() {
-        return parentRelationStudentList;
-    }
-
-    public void setParentRelationStudentList(List<ParentRelationStudent> parentRelationStudentList) {
-        this.parentRelationStudentList = parentRelationStudentList;
-    }
-
-    public List<Report> getReportList() {
-        return reportList;
-    }
-
-    public void setReportList(List<Report> reportList) {
-        this.reportList = reportList;
     }
 
     @Override
@@ -245,5 +234,5 @@ public class Student implements Serializable {
     public String toString() {
         return "com.codelabs.entity.Student[ studentId=" + studentId + " ]";
     }
-
+    
 }

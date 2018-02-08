@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,34 +37,40 @@ public class Exam implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "exam_id")
     private Integer examId;
-    @Column(name = "exam_title")
-    private String examTitle;
     @Column(name = "exam_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date examDate;
-    @Column(name = "created_date", insertable = false)
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "full_mark")
+    private Double fullMark;
+    @Column(name = "pass_mark")
+    private Double passMark;
+    @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date", nullable = true)
+    @Column(name = "modified_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
-    @Column(name = "status")
-    private Boolean status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "examId")
-    private List<Report> reportList;
+    private List<Mark> markList;
+    @JoinColumn(name = "class_id", referencedColumnName = "class_id")
+    @ManyToOne(optional = false)
+    private _Class classId;
+    @JoinColumn(name = "exam_type_id", referencedColumnName = "exam_type_id")
+    @ManyToOne(optional = false)
+    private ExamType examTypeId;
+    @JoinColumn(name = "subject_id", referencedColumnName = "subject_id")
+    @ManyToOne(optional = false)
+    private Subject subjectId;
 
     public Exam() {
     }
 
     public Exam(Integer examId) {
         this.examId = examId;
-    }
-
-    public Exam(Integer examId, String examTitle) {
-        this.examId = examId;
-        this.examTitle = examTitle;
     }
 
     public Integer getExamId() {
@@ -73,20 +81,28 @@ public class Exam implements Serializable {
         this.examId = examId;
     }
 
-    public String getExamTitle() {
-        return examTitle;
-    }
-
-    public void setExamTitle(String examTitle) {
-        this.examTitle = examTitle;
-    }
-
     public Date getExamDate() {
         return examDate;
     }
 
     public void setExamDate(Date examDate) {
         this.examDate = examDate;
+    }
+
+    public Double getFullMark() {
+        return fullMark;
+    }
+
+    public void setFullMark(Double fullMark) {
+        this.fullMark = fullMark;
+    }
+
+    public Double getPassMark() {
+        return passMark;
+    }
+
+    public void setPassMark(Double passMark) {
+        this.passMark = passMark;
     }
 
     public Date getCreatedDate() {
@@ -105,20 +121,36 @@ public class Exam implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public List<Mark> getMarkList() {
+        return markList;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setMarkList(List<Mark> markList) {
+        this.markList = markList;
     }
 
-    public List<Report> getReportList() {
-        return reportList;
+    public _Class getClassId() {
+        return classId;
     }
 
-    public void setReportList(List<Report> reportList) {
-        this.reportList = reportList;
+    public void setClassId(_Class classId) {
+        this.classId = classId;
+    }
+
+    public ExamType getExamTypeId() {
+        return examTypeId;
+    }
+
+    public void setExamTypeId(ExamType examTypeId) {
+        this.examTypeId = examTypeId;
+    }
+
+    public Subject getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Subject subjectId) {
+        this.subjectId = subjectId;
     }
 
     @Override
@@ -145,5 +177,5 @@ public class Exam implements Serializable {
     public String toString() {
         return "com.codelabs.entity.Exam[ examId=" + examId + " ]";
     }
-
+    
 }
