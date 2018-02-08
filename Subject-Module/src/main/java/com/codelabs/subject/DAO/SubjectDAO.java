@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs._class.DAO;
+package com.codelabs.subject.DAO;
 
 import com.codelabs.core.DAO.GenericDAO;
-import com.codelabs.entity._Class;
+import com.codelabs.entity.Subject;
 
 /**
  *
  * @author Anuzaa_2
  */
-public interface ClassDAO extends GenericDAO<_Class> {
+public interface SubjectDAO extends GenericDAO<Subject> {
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs._class.DTO;
+package com.codelabs.subject.DTO;
 
 import java.util.Date;
 import lombok.Data;
@@ -13,13 +13,16 @@ import lombok.Data;
  * @author Anuzaa_2
  */
 @Data
-public class ClassDTO {
+public class SubjectDTO {
 
-    private Integer classId;
+    private Integer subjectId;
 
-    private String className;
+    private String subjectName;
 
     private Date createdDate;
 
+    private Date modifiedDate;
+
     private Boolean status;
+
 }
