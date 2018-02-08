@@ -15,6 +15,9 @@
         <module>_Class-Module</module>
         <module>Exam-Module</module>
         <module>Attendance-Module</module>
+        <module>StudentStatus-Module</module>
+        <module>Relation-Module</module>
+        <module>Time-Module</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -35,16 +35,16 @@ public class Time implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    
     @Column(name = "time_id")
     private Integer timeId;
-    @Basic(optional = false)
+
     @Column(name = "time_name")
     private String timeName;
-    @Column(name = "created_date")
+    @Column(name = "created_date",insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date")
+    @Column(name = "modified_date",nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @Column(name = "status")
@@ -112,26 +112,7 @@ public class Time implements Serializable {
         this.routineList = routineList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (timeId != null ? timeId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Time)) {
-            return false;
-        }
-        Time other = (Time) object;
-        if ((this.timeId == null && other.timeId != null) || (this.timeId != null && !this.timeId.equals(other.timeId))) {
-            return false;
-        }
-        return true;
-    }
-
+   
     @Override
     public String toString() {
         return "com.codelabs.entity.Time[ timeId=" + timeId + " ]";
