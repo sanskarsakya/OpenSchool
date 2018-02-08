@@ -77,26 +77,7 @@ public class Relation implements Serializable {
         this.parentRelationStudentList = parentRelationStudentList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (relationId != null ? relationId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Relation)) {
-            return false;
-        }
-        Relation other = (Relation) object;
-        if ((this.relationId == null && other.relationId != null) || (this.relationId != null && !this.relationId.equals(other.relationId))) {
-            return false;
-        }
-        return true;
-    }
-
+   
     @Override
     public String toString() {
         return "com.codelabs.entity.Relation[ relationId=" + relationId + " ]";
