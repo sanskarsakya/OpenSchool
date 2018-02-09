@@ -72,9 +72,9 @@ public class TeacherMapper {
         if (t.getStatus() != null) {
             td.setStatus(t.getStatus());
         }
-        if (t.getGenderId() != 0) {
+        if (t.getGenderId() != 0) {          
             td.setGenderId(new Gender(t.getGenderId()));
-        }        
+        }
         return td;
 
     }
