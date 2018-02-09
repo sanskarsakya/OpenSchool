@@ -9,6 +9,7 @@ import com.codelabs.core.Service.GenericService;
 import com.codelabs.entity.Section;
 import com.codelabs.section.DAO.SectionDAO;
 import com.codelabs.section.DTO.SectionDTO;
+import com.codelabs.section.Mapper.SectionMapper;
 import com.codelabs.section.Service.SectionService;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,24 +31,28 @@ public class SectionServiceImpl implements SectionService {
     public List<SectionDTO> getAll() {
         List<SectionDTO> sDTOList = new ArrayList<>();
         for (Section s : sd.getAll()) {
-            sDTOList.add(new ModelMapper().map(s, SectionDTO.class));
+            sDTOList.add(new SectionMapper().toDTO(s));
         }
         return sDTOList;
     }
 
     @Override
-    public SectionDTO insert(SectionDTO t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SectionDTO insert(SectionDTO s) {
+        Section section = new SectionMapper().toEntity(null, s);
+        Section rs = sd.insert(section);
+        s.setSectionId(rs.getSectionId());
+        return s;
     }
 
     @Override
-    public void update(int id, SectionDTO t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(int id, SectionDTO s) {
+        Section section = sd.getById(id);
+        sd.update(new SectionMapper().toEntity(section, s));
     }
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return sd.delete(id);
     }
 
     @Override

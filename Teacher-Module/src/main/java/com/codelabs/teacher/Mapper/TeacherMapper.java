@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs.teacher;
+package com.codelabs.teacher.Mapper;
 
 import com.codelabs.entity.Gender;
 import com.codelabs.entity.Teacher;

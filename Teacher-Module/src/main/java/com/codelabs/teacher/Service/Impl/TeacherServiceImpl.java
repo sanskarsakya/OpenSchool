@@ -11,7 +11,7 @@ import com.codelabs.entity.Teacher;
 import com.codelabs.teacher.DAO.TeacherDAO;
 import com.codelabs.teacher.DTO.TeacherDTO;
 import com.codelabs.teacher.Service.TeacherService;
-import com.codelabs.teacher.TeacherMapper;
+import com.codelabs.teacher.Mapper.TeacherMapper;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -38,8 +38,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public TeacherDTO insert(TeacherDTO t) {
-        ModelMapper mapper = new ModelMapper();
+    public TeacherDTO insert(TeacherDTO t) {        
         Teacher teacher = new TeacherMapper().toEntity(null, t);
         teacher.setPassword(t.getUsername() + "123");
         Teacher rt = tDAO.insert(teacher);
