@@ -11,10 +11,11 @@ import com.codelabs.entity.Teacher;
 import com.codelabs.teacher.DAO.TeacherDAO;
 import com.codelabs.teacher.DTO.TeacherDTO;
 import com.codelabs.teacher.Service.TeacherService;
-import com.codelabs.teacher.TeacherMapper;
+import com.codelabs.teacher.Mapper.TeacherMapper;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import org.modelmapper.ModelMapper;
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +25,10 @@ import org.springframework.stereotype.Service;
  */
 @Service(value = "TeacherService")
 public class TeacherServiceImpl implements TeacherService {
-
+    
     @Autowired
     private TeacherDAO tDAO;
-
+    
     @Override
     public List<TeacherDTO> getAll() {
         List<TeacherDTO> tDTOList = new ArrayList<>();
@@ -36,28 +37,28 @@ public class TeacherServiceImpl implements TeacherService {
         }
         return tDTOList;
     }
-
+    
     @Override
-    public TeacherDTO insert(TeacherDTO t) {
-        ModelMapper mapper = new ModelMapper();
+    public TeacherDTO insert(TeacherDTO t) {        
         Teacher teacher = new TeacherMapper().toEntity(null, t);
         teacher.setPassword(t.getUsername() + "123");
         Teacher rt = tDAO.insert(teacher);
         t.setTeacherId(rt.getTeacherId());
         return t;
     }
-
+    
     @Override
     public void update(int id, TeacherDTO t) {
         Teacher teacher = tDAO.getById(id);
+        teacher.setModifiedDate(new Date());
         tDAO.update(new TeacherMapper().toEntity(teacher, t));
     }
-
+    
     @Override
     public boolean delete(int id) {
         return tDAO.delete(id);
     }
-
+    
     @Override
     public TeacherDTO getById(int id) {
         Teacher t = tDAO.getById(id);

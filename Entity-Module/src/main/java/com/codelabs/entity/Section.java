@@ -34,16 +34,14 @@ public class Section implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "section_id")
     private Integer sectionId;
-    @Basic(optional = false)
     @Column(name = "section_name")
     private String sectionName;
-    @Column(name = "created_date")
+    @Column(name = "created_date", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date")
+    @Column(name = "modified_date", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @Column(name = "status")
@@ -147,5 +145,5 @@ public class Section implements Serializable {
     public String toString() {
         return "com.codelabs.entity.Section[ sectionId=" + sectionId + " ]";
     }
-    
+
 }

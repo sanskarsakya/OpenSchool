@@ -33,29 +33,29 @@ public class TeacherController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<TeacherDTO> getAll() {
-        return tService.getAll();
+    public ResponseEntity<List<TeacherDTO>> getAll() {
+        return new ResponseEntity<List<TeacherDTO>>(tService.getAll(), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public TeacherDTO insert(@RequestBody TeacherDTO t) {
-        return tService.insert(t);
+    public ResponseEntity<TeacherDTO> insert(@RequestBody TeacherDTO t) {
+        return new ResponseEntity<TeacherDTO>(tService.insert(t), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public String update(@PathVariable("id") int id, @RequestBody TeacherDTO t) {
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody TeacherDTO t) {
         t.setTeacherId(id);
         tService.update(id, t);
-        return "{\"response\":\"success\"}";
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") int id) {
+    public ResponseEntity delete(@PathVariable("id") int id) {
         tService.delete(id);
-        return "{\"response\":\"success\"}";
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
