@@ -57,7 +57,11 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public SectionDTO getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Section s = sd.getById(id);
+        if (s == null) {
+            return null;
+        }
+        return new SectionMapper().toDTO(s);
     }
 
 }

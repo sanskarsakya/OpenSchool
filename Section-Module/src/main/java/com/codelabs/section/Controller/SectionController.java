@@ -8,6 +8,7 @@ package com.codelabs.section.Controller;
 import com.codelabs.section.DTO.SectionDTO;
 import com.codelabs.section.Service.SectionService;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/sections")
 public class SectionController {
 
+    static final Logger logger = Logger.getLogger(SectionController.class);
     @Autowired
     private SectionService ss;
 
@@ -39,7 +41,7 @@ public class SectionController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public SectionDTO insert(@RequestBody SectionDTO t) {
+    public SectionDTO insert(@RequestBody SectionDTO t) {        
         return ss.insert(t);
     }
 

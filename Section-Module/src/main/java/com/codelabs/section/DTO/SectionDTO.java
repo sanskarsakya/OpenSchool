@@ -5,6 +5,7 @@
  */
 package com.codelabs.section.DTO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Date;
 import lombok.Data;
 
@@ -13,11 +14,18 @@ import lombok.Data;
  * @author puzansakya
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SectionDTO {
 
     private Integer sectionId;
     private String sectionName;
-    private Date createdDate;    
+    private Date createdDate;
     private Boolean status;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    private int classId;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    private int teacherId;
+    private String _class;
+    private String teacher;
 
 }
