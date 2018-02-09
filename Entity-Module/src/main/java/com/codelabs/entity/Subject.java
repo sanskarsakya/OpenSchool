@@ -35,10 +35,10 @@ public class Subject implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+
     @Column(name = "subject_id")
     private Integer subjectId;
-    @Basic(optional = false)
+
     @Column(name = "subject_name")
     private String subjectName;
     @Column(name = "created_date")
@@ -112,29 +112,10 @@ public class Subject implements Serializable {
         this.examList = examList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (subjectId != null ? subjectId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Subject)) {
-            return false;
-        }
-        Subject other = (Subject) object;
-        if ((this.subjectId == null && other.subjectId != null) || (this.subjectId != null && !this.subjectId.equals(other.subjectId))) {
-            return false;
-        }
-        return true;
-    }
-
+   
     @Override
     public String toString() {
         return "com.codelabs.entity.Subject[ subjectId=" + subjectId + " ]";
     }
-    
+
 }

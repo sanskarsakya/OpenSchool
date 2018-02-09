@@ -17,6 +17,7 @@
         <module>StudentStatus-Module</module>
         <module>Time-Module</module>
         <module>Section-Module</module>
+        <module>Subject-Module</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

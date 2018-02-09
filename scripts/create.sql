@@ -19,6 +19,7 @@
 --6.create tbl_marks table
 
 DROP TABLE IF EXISTS tbl_parents cascade;
+DROP TABLE IF EXISTS tbl_genders cascade;
 DROP TABLE IF EXISTS tbl_classes cascade;
 DROP TABLE IF EXISTS tbl_teachers cascade;
 DROP TABLE IF EXISTS tbl_sections cascade;
