@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs._class.DTO;
+package com.codelabs.section.DTO;
 
 import java.util.Date;
 import lombok.Data;
 
 /**
  *
- * @author koirala
+ * @author puzansakya
  */
 @Data
-public class _ClassDTO {
+public class SectionDTO {
 
-    private Integer classId;
-    private String className;
-    private Date createdDate;
+    private Integer sectionId;
+    private String sectionName;
+    private Date createdDate;    
     private Boolean status;
+
 }

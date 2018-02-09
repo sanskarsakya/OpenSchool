@@ -66,10 +66,15 @@
         </dependency>           
         <dependency>
             <groupId>com.code-labs</groupId>
-            <artifactId>Teacher-Module</artifactId>            
+            <artifactId>Section-Module</artifactId>            
             <version>1.0</version>
         </dependency>           
         <dependency>
+            <groupId>com.code-labs</groupId>
+            <artifactId>Teacher-Module</artifactId>            
+            <version>1.0</version>
+        </dependency>           
+        <!--        <dependency>
             <groupId>com.code-labs</groupId>
             <artifactId>_Class-Module</artifactId>            
             <version>1.0</version>
@@ -108,7 +113,7 @@
             <groupId>com.code-labs</groupId>
             <artifactId>Time-Module</artifactId>
             <version>1.0</version>
-        </dependency>    
+        </dependency>    -->
     </dependencies>
 
     <build>
@@ -163,6 +168,22 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>1.1.0.Final</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
         </plugins>
     </build>

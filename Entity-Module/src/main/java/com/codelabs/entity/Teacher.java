@@ -29,84 +29,72 @@ import javax.persistence.TemporalType;
  * @author puzansakya
  */
 @Entity
-@Table(name = "tbl_students")
+@Table(name = "tbl_teachers")
 @NamedQueries({
-    @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")})
-public class Student implements Serializable {
+    @NamedQuery(name = "Teacher.findAll", query = "SELECT t FROM Teacher t")})
+public class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "student_id")
-    private Integer studentId;
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)   
+    @Column(name = "teacher_id")
+    private Integer teacherId;    
     @Column(name = "first_name")
-    private String firstName;
-    @Basic(optional = false)
+    private String firstName;    
     @Column(name = "last_name")
-    private String lastName;
-    @Basic(optional = false)
+    private String lastName;    
+    @Column(name = "city")
+    private String city;    
+    @Column(name = "street")
+    private String street;    
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
     @Column(name = "contact_no")
-    private String contactNo;
-    @Basic(optional = false)
+    private String contactNo;    
     @Column(name = "username")
-    private String username;
-    @Basic(optional = false)
+    private String username;    
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
-    @Column(name = "street")
-    private String street;
-    @Basic(optional = false)
-    @Column(name = "city")
-    private String city;
-    @Column(name = "created_date")
+    @Column(name = "social_link")
+    private String socialLink;
+    @Column(name = "created_date",insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date")
+    @Column(name = "modified_date",nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
-    private List<Mark> markList;
-    @JoinColumn(name = "class_id", referencedColumnName = "class_id")
-    @ManyToOne(optional = false)
-    private _Class classId;
+    @Column(name = "status")
+    private Boolean status;
     @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
     @ManyToOne(optional = false)
     private Gender genderId;
-    @JoinColumn(name = "status_id", referencedColumnName = "student_status_id")
-    @ManyToOne(optional = false)
-    private StudentStatus statusId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacherId")
+    private List<Section> sectionList;
 
-    public Student() {
+    public Teacher() {
     }
 
-    public Student(Integer studentId) {
-        this.studentId = studentId;
+    public Teacher(Integer teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public Student(Integer studentId, String firstName, String lastName, String email, String contactNo, String username, String password, String street, String city) {
-        this.studentId = studentId;
+    public Teacher(Integer teacherId, String firstName, String lastName, String city, String street, String email, String username, String password) {
+        this.teacherId = teacherId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.city = city;
+        this.street = street;
         this.email = email;
-        this.contactNo = contactNo;
         this.username = username;
         this.password = password;
-        this.street = street;
-        this.city = city;
     }
 
-    public Integer getStudentId() {
-        return studentId;
+    public Integer getTeacherId() {
+        return teacherId;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
     }
 
     public String getFirstName() {
@@ -123,6 +111,22 @@ public class Student implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getEmail() {
@@ -157,20 +161,12 @@ public class Student implements Serializable {
         this.password = password;
     }
 
-    public String getStreet() {
-        return street;
+    public String getSocialLink() {
+        return socialLink;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+    public void setSocialLink(String socialLink) {
+        this.socialLink = socialLink;
     }
 
     public Date getCreatedDate() {
@@ -189,20 +185,12 @@ public class Student implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-    public List<Mark> getMarkList() {
-        return markList;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setMarkList(List<Mark> markList) {
-        this.markList = markList;
-    }
-
-    public _Class getClassId() {
-        return classId;
-    }
-
-    public void setClassId(_Class classId) {
-        this.classId = classId;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public Gender getGenderId() {
@@ -213,29 +201,29 @@ public class Student implements Serializable {
         this.genderId = genderId;
     }
 
-    public StudentStatus getStatusId() {
-        return statusId;
+    public List<Section> getSectionList() {
+        return sectionList;
     }
 
-    public void setStatusId(StudentStatus statusId) {
-        this.statusId = statusId;
+    public void setSectionList(List<Section> sectionList) {
+        this.sectionList = sectionList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (studentId != null ? studentId.hashCode() : 0);
+        hash += (teacherId != null ? teacherId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Student)) {
+        if (!(object instanceof Teacher)) {
             return false;
         }
-        Student other = (Student) object;
-        if ((this.studentId == null && other.studentId != null) || (this.studentId != null && !this.studentId.equals(other.studentId))) {
+        Teacher other = (Teacher) object;
+        if ((this.teacherId == null && other.teacherId != null) || (this.teacherId != null && !this.teacherId.equals(other.teacherId))) {
             return false;
         }
         return true;
@@ -243,7 +231,7 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "com.codelabs.entity.Student[ studentId=" + studentId + " ]";
+        return "com.codelabs.entity.Teacher[ teacherId=" + teacherId + " ]";
     }
     
 }

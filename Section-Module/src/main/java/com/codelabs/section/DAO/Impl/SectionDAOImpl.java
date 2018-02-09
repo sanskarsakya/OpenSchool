@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs.attendance.DAO.Impl;
+package com.codelabs.section.DAO.Impl;
 
-import com.codelabs.attendance.DAO.AttendanceDAO;
 import com.codelabs.core.DAO.Impl.GenericDAOImpl;
-import com.codelabs.entity.Attendance;
+import com.codelabs.entity.Section;
+import com.codelabs.section.DAO.SectionDAO;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Prachin
+ * @author puzansakya
  */
-@Repository(value = "AttendanceDAO")
-public class AttendanceDAOImpl extends GenericDAOImpl<Attendance> implements AttendanceDAO {
+@Repository(value = "SectionDAO")
+public class SectionDAOImpl extends GenericDAOImpl<Section> implements SectionDAO {
 
 }

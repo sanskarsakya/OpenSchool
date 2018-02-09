@@ -5,7 +5,6 @@
  */
 package com.codelabs.studentstatus.SERVICE.IMPL;
 
-import com.codelabs.entity.Attendance;
 import com.codelabs.entity.StudentStatus;
 import com.codelabs.studentstatus.DAO.StudentStatusDAO;
 import com.codelabs.studentstatus.DTO.StudentStatusDTO;

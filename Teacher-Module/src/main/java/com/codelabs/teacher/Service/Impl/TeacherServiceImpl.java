@@ -5,11 +5,13 @@
  */
 package com.codelabs.teacher.Service.Impl;
 
+import com.codelabs.entity.Gender;
 import com.codelabs.entity.Teacher;
 //import com.codelabs.teacher.Builder.TeacherBuilder;
 import com.codelabs.teacher.DAO.TeacherDAO;
 import com.codelabs.teacher.DTO.TeacherDTO;
 import com.codelabs.teacher.Service.TeacherService;
+import com.codelabs.teacher.TeacherMapper;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -30,9 +32,7 @@ public class TeacherServiceImpl implements TeacherService {
     public List<TeacherDTO> getAll() {
         List<TeacherDTO> tDTOList = new ArrayList<>();
         for (Teacher t : tDAO.getAll()) {
-            ModelMapper mapper = new ModelMapper();
-            TeacherDTO tdto = mapper.map(t, TeacherDTO.class);
-            tDTOList.add(tdto);
+            tDTOList.add(new TeacherMapper().toDTO(t));
         }
         return tDTOList;
     }
@@ -40,7 +40,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherDTO insert(TeacherDTO t) {
         ModelMapper mapper = new ModelMapper();
-        Teacher teacher = mapper.map(t, Teacher.class);
+        Teacher teacher = new TeacherMapper().toEntity(null, t);
         teacher.setPassword(t.getUsername() + "123");
         Teacher rt = tDAO.insert(teacher);
         t.setTeacherId(rt.getTeacherId());
@@ -49,9 +49,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void update(int id, TeacherDTO t) {
-        Teacher teacher = new ModelMapper().map(t, Teacher.class);
-        teacher.setPassword(t.getUsername() + "123");
-        tDAO.update(teacher);
+        Teacher teacher = tDAO.getById(id);
+        tDAO.update(new TeacherMapper().toEntity(teacher, t));
     }
 
     @Override
@@ -65,7 +64,6 @@ public class TeacherServiceImpl implements TeacherService {
         if (t == null) {
             return null;
         }
-        return new ModelMapper().map(t, TeacherDTO.class);
+        return new TeacherMapper().toDTO(t);
     }
-
 }

@@ -50,6 +50,8 @@ public class _Class implements Serializable {
     @Column(name = "status")
     private Boolean status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
+    private List<Section> sectionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
     private List<Student> studentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
     private List<Exam> examList;
@@ -104,6 +106,14 @@ public class _Class implements Serializable {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public List<Section> getSectionList() {
+        return sectionList;
+    }
+
+    public void setSectionList(List<Section> sectionList) {
+        this.sectionList = sectionList;
     }
 
     public List<Student> getStudentList() {

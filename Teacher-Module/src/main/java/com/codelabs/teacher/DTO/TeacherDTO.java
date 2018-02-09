@@ -5,7 +5,10 @@
  */
 package com.codelabs.teacher.DTO;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
@@ -13,6 +16,7 @@ import lombok.Data;
  * @author puzansakya
  */
 @Data
+@JsonInclude(Include.NON_NULL)
 public class TeacherDTO {
 
     private Integer teacherId;
@@ -21,9 +25,14 @@ public class TeacherDTO {
     private String city;
     private String street;
     private String email;
+    private String contactNo;
     private String username;
-//    private String password;
-    private Date createdDate;
+    @JsonInclude(Include.NON_DEFAULT)
+    private int genderId;
+    private String gender;
+    @JsonIgnore
+    private String password;
+    private String socialLink;
     private Boolean status;
 
 }

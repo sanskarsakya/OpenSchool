@@ -6,12 +6,12 @@
 package com.codelabs.time.DAO;
 
 import com.codelabs.core.DAO.GenericDAO;
-import com.codelabs.entity.Time;
+//import com.codelabs.entity.Time;
 
 /**
  *
  * @author sd14d
  */
-public interface TimeDAO extends GenericDAO<Time>{
-    
+public interface TimeDAO {
+
 }

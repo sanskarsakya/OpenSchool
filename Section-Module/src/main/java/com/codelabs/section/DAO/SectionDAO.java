@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs.relation.DAO;
+package com.codelabs.section.DAO;
 
 import com.codelabs.core.DAO.GenericDAO;
-import com.codelabs.entity.Relation;
+import com.codelabs.entity.Section;
 
 /**
  *
- * @author sd14d
+ * @author puzansakya
  */
-public interface RelationDAO extends GenericDAO<Relation>{
+public interface SectionDAO extends GenericDAO<Section> {
+
     
 }

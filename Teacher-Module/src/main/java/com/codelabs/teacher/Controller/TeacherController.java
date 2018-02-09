@@ -40,7 +40,7 @@ public class TeacherController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public TeacherDTO insert(@RequestBody TeacherDTO t) {
-        return tService.insert(t);        
+        return tService.insert(t);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

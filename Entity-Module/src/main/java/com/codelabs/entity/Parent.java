@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -42,9 +44,6 @@ public class Parent implements Serializable {
     @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
-    @Column(name = "gender")
-    private String gender;
-    @Basic(optional = false)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
@@ -67,6 +66,9 @@ public class Parent implements Serializable {
     private Date modifiedDate;
     @Column(name = "status")
     private Boolean status;
+    @JoinColumn(name = "gender_id", referencedColumnName = "gender_id")
+    @ManyToOne(optional = false)
+    private Gender genderId;
 
     public Parent() {
     }
@@ -75,11 +77,10 @@ public class Parent implements Serializable {
         this.parentId = parentId;
     }
 
-    public Parent(Integer parentId, String firstName, String lastName, String gender, String username, String password, String contactNo) {
+    public Parent(Integer parentId, String firstName, String lastName, String username, String password, String contactNo) {
         this.parentId = parentId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.gender = gender;
         this.username = username;
         this.password = password;
         this.contactNo = contactNo;
@@ -107,14 +108,6 @@ public class Parent implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getUsername() {
@@ -187,6 +180,14 @@ public class Parent implements Serializable {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Gender getGenderId() {
+        return genderId;
+    }
+
+    public void setGenderId(Gender genderId) {
+        this.genderId = genderId;
     }
 
     @Override

@@ -6,7 +6,7 @@
 package com.codelabs.time.DAO.IMPL;
 
 import com.codelabs.core.DAO.Impl.GenericDAOImpl;
-import com.codelabs.entity.Time;
+//import com.codelabs.entity.Time;
 import com.codelabs.time.DAO.TimeDAO;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
  * @author sd14d
  */
 @Repository(value = "TimeDAO")
-public class TimeDAOImpl extends GenericDAOImpl<Time> implements TimeDAO{
-    
+public class TimeDAOImpl {
+
 }
