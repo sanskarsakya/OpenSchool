@@ -33,35 +33,29 @@ public class Parent implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "parent_id")
-    private Integer parentId;
-    @Basic(optional = false)
+    private Integer parentId;    
     @Column(name = "first_name")
-    private String firstName;
-    @Basic(optional = false)
+    private String firstName;    
     @Column(name = "last_name")
-    private String lastName;
-    @Basic(optional = false)
+    private String lastName;    
     @Column(name = "username")
-    private String username;
-    @Basic(optional = false)
+    private String username;    
     @Column(name = "password")
     private String password;
     @Column(name = "street")
     private String street;
     @Column(name = "city")
-    private String city;
-    @Basic(optional = false)
+    private String city;    
     @Column(name = "contact_no")
     private String contactNo;
     @Column(name = "social_link")
     private String socialLink;
-    @Column(name = "created_date")
+    @Column(name = "created_date",insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date")
+    @Column(name = "modified_date",nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @Column(name = "status")

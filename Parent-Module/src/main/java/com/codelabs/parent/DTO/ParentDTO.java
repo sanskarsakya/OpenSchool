@@ -5,6 +5,8 @@
  */
 package com.codelabs.parent.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Date;
 import lombok.Data;
 
@@ -13,15 +15,23 @@ import lombok.Data;
  * @author kamal
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ParentDTO {
 
     private Integer parentId;
     private String firstName;
     private String lastName;
-    private String contactNo;
+    private String username;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    private int genderId;
+    private String gender;
+    @JsonIgnore
+    private String password;
     private String street;
     private String city;
+    private String contactNo;
+    private String socialLink;
     private Date createdDate;
+    private Date modifiedDate;
     private Boolean status;
-    private String username;
 }

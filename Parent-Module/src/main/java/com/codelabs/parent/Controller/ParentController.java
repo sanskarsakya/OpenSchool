@@ -41,23 +41,23 @@ public class ParentController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<ParentDTO> getAll() {
-        return ps.getAll();
+    public ResponseEntity<List<ParentDTO>> getAll() {
+        return new ResponseEntity<List<ParentDTO>>(ps.getAll(), HttpStatus.OK);
 
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ParentDTO save(@RequestBody ParentDTO pd) {
-        return ps.insert(pd);
+    public ResponseEntity<ParentDTO> save(@RequestBody ParentDTO pd) {
+        return new ResponseEntity<ParentDTO>(ps.insert(pd), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public String update(@PathVariable("id") int id,@RequestBody ParentDTO pd) {
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody ParentDTO pd) {
         pd.setParentId(id);
         ps.update(id, pd);
-        return "success";
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
 
     }
 
@@ -73,9 +73,9 @@ public class ParentController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") int id) {
+    public ResponseEntity delete(@PathVariable("id") int id) {
         ps.delete(id);
-        return "{response:\"success\"}";
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
 }
