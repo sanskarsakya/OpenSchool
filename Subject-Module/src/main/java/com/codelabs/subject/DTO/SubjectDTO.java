@@ -5,7 +5,6 @@
  */
 package com.codelabs.subject.DTO;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.Date;
@@ -20,12 +19,8 @@ import lombok.Data;
 public class SubjectDTO {
 
     private Integer subjectId;
-
     private String subjectName;
-
     private Date createdDate;
-
     private Date modifiedDate;
-
     private Boolean status;
 }

@@ -26,44 +26,48 @@ import org.springframework.stereotype.Service;
 public class SubjectServiceImpl implements SubjectService {
 
     @Autowired
-    private SubjectDAO sdao;
+    private SubjectDAO dao;
+
+    private SubjectMapper mapper;
+
+    public SubjectServiceImpl() {
+        mapper = new SubjectMapper();
+    }
 
     @Override
     public List<SubjectDTO> getAll() {
-        List<SubjectDTO> sDTOList = new ArrayList<>();
-        for (Subject subject : sdao.getAll()) {
-            sDTOList.add(new SubjectMapper().toDTO(subject));
+        List<SubjectDTO> dtoList = new ArrayList<>();
+        for (Subject entity : dao.getAll()) {
+            dtoList.add(mapper.toDTO(entity));
         }
-        return sDTOList;
+        return dtoList;
 
     }
 
     @Override
-    public SubjectDTO insert(SubjectDTO subDTO) {
-        Subject subject = new SubjectMapper().toEntity(null, subDTO);
-        Subject rs = sdao.insert(subject);
-        subDTO.setSubjectId(rs.getSubjectId());
-        return subDTO;
+    public SubjectDTO insert(SubjectDTO dto) {
+        dto.setSubjectId(dao.insert(mapper.toEntity(null, dto)).getSubjectId());
+        return dto;
     }
 
     @Override
-    public void update(int id, SubjectDTO subDTO) {
-        Subject subject = sdao.getById(id);
-        subject.setModifiedDate(new Date());
-        sdao.update(new SubjectMapper().toEntity(subject, subDTO));
+    public void update(int id, SubjectDTO dto) {
+        Subject entity = dao.getById(id);
+        entity.setModifiedDate(new Date());
+        dao.update(mapper.toEntity(entity, dto));
     }
 
     @Override
     public boolean delete(int id) {
-        return sdao.delete(id);
+        return dao.delete(id);
     }
 
     @Override
     public SubjectDTO getById(int id) {
-        Subject subject = sdao.getById(id);
-        if (subject == null) {
+        Subject entity = dao.getById(id);
+        if (entity == null) {
             return null;
         }
-        return new SubjectMapper().toDTO(subject);
+        return mapper.toDTO(entity);
     }
 }

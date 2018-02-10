@@ -47,8 +47,7 @@ public class ClassController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity update(@PathVariable("id") int id, @RequestBody _ClassDTO dto) {
-        dto.setClassId(id);
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody _ClassDTO dto) {        
         service.update(id, dto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -63,10 +62,10 @@ public class ClassController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<_ClassDTO> getById(@PathVariable("id") int id) {
-        _ClassDTO cDTO = service.getById(id);
-        if (cDTO == null) {
+        _ClassDTO dto = service.getById(id);
+        if (dto == null) {
             return new ResponseEntity<_ClassDTO>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<_ClassDTO>(cDTO, HttpStatus.OK);
+        return new ResponseEntity<_ClassDTO>(dto, HttpStatus.OK);
     }
 }

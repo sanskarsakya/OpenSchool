@@ -28,43 +28,44 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/subjects")
 public class SubjectController {
    @Autowired
-    private SubjectService ss;
+    private SubjectService service;
     
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<SubjectDTO> getAll() {
-        return ss.getAll();
+    public ResponseEntity<List<SubjectDTO>> getAll() {        
+          return new ResponseEntity<List<SubjectDTO>>(
+                service.getAll(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public SubjectDTO save(@RequestBody SubjectDTO sDTO) {
-        return ss.insert(sDTO);        
+    public  ResponseEntity<SubjectDTO>insert(@RequestBody SubjectDTO dto) {
+        return new ResponseEntity<SubjectDTO>(service.insert(dto), HttpStatus.CREATED);      
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public String update(@PathVariable("id") int id, @RequestBody SubjectDTO sDTO) {
-        sDTO.setSubjectId(id);
-        ss.update(id, sDTO);
-        return "{\"response\":\"success\"}";
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody SubjectDTO dto) {        
+        service.update(id, dto);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") int id) {
-        ss.delete(id);
-        return "{\"response\":\"success\"}";
+    public ResponseEntity delete(@PathVariable("id") int id) {
+        service.delete(id);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<SubjectDTO> getById(@PathVariable("id") int id) {
-        SubjectDTO s = ss.getById(id);
-        if (s == null) {
+        SubjectDTO dto = service.getById(id);
+        if (dto == null) {
             return new ResponseEntity<SubjectDTO>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<SubjectDTO>(s, HttpStatus.OK);
+        return new ResponseEntity<SubjectDTO>(dto, HttpStatus.OK);
     }
  
 }

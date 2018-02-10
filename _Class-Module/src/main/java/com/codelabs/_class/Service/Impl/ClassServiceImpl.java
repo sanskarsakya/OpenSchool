@@ -35,7 +35,7 @@ public class ClassServiceImpl implements ClassService {
     public List<_ClassDTO> getAll() {
         List<_ClassDTO> dtoList = new ArrayList<>();
         for (_Class entity : dao.getAll()) {
-            dtoList.add(new _ClassMapper().toDTO(entity));
+            dtoList.add(mapper.toDTO(entity));
         }
         return dtoList;
     }

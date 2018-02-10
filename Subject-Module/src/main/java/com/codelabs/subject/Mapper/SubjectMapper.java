@@ -14,38 +14,38 @@ import com.codelabs.subject.DTO.SubjectDTO;
  */
 public class SubjectMapper {
 
-    public SubjectDTO toDTO(Subject s) {
-        SubjectDTO sd = new SubjectDTO();
-        sd.setSubjectId(s.getSubjectId());
-        sd.setSubjectName(s.getSubjectName());
-        sd.setCreatedDate(s.getCreatedDate());
-        sd.setModifiedDate(s.getModifiedDate());
-        sd.setStatus(s.getStatus());
+    public SubjectDTO toDTO(Subject entity) {
+        SubjectDTO dtoMapped = new SubjectDTO();
+        dtoMapped.setSubjectId(entity.getSubjectId());
+        dtoMapped.setSubjectName(entity.getSubjectName());
+        dtoMapped.setCreatedDate(entity.getCreatedDate());
+        dtoMapped.setModifiedDate(entity.getModifiedDate());
+        dtoMapped.setStatus(entity.getStatus());
 
-        return sd;
+        return dtoMapped;
 
     }
 
-    public Subject toEntity(Subject subject, SubjectDTO s) {
-        Subject sd = new Subject();
-        if (subject != null) {
-            sd = subject;
+    public Subject toEntity(Subject entity, SubjectDTO dto) {
+        Subject entityMapped = new Subject();
+        if (entity != null) {
+            entityMapped = entity;
         }
-        if (s.getSubjectId() != null) {
-            sd.setSubjectId(s.getSubjectId());
+        if (dto.getSubjectId() != null) {
+            entityMapped.setSubjectId(dto.getSubjectId());
         }
-        if (s.getSubjectName() != null) {
-            sd.setSubjectName(s.getSubjectName());
+        if (dto.getSubjectName() != null) {
+            entityMapped.setSubjectName(dto.getSubjectName());
         }
-        if (s.getCreatedDate() != null) {
-            sd.setCreatedDate(s.getCreatedDate());
-        }
-        
-        if (s.getStatus() != null) {
-            sd.setStatus(s.getStatus());
+        if (dto.getCreatedDate() != null) {
+            entityMapped.setCreatedDate(dto.getCreatedDate());
         }
 
-        return sd;
+        if (dto.getStatus() != null) {
+            entityMapped.setStatus(dto.getStatus());
+        }
+
+        return entityMapped;
 
     }
 }
