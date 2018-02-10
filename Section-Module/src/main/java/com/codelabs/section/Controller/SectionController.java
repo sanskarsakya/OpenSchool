@@ -47,7 +47,9 @@ public class SectionController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity update(@PathVariable("id") int id, @RequestBody SectionDTO t) {
+    public ResponseEntity update(
+            @PathVariable("id") int id,
+            @RequestBody SectionDTO t) {
         t.setSectionId(id);
         ss.update(id, t);
         return new ResponseEntity(HttpStatus.NO_CONTENT);

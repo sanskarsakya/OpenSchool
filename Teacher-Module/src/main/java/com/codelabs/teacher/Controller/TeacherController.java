@@ -34,7 +34,9 @@ public class TeacherController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<TeacherDTO>> getAll() {
-        return new ResponseEntity<List<TeacherDTO>>(tService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<List<TeacherDTO>>(
+                tService.getAll(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -45,7 +47,9 @@ public class TeacherController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity update(@PathVariable("id") int id, @RequestBody TeacherDTO t) {
+    public ResponseEntity update(
+            @PathVariable("id") int id,
+            @RequestBody TeacherDTO t) {
         t.setTeacherId(id);
         tService.update(id, t);
         return new ResponseEntity(HttpStatus.NO_CONTENT);

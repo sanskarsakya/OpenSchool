@@ -29,39 +29,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ClassController {
 
     @Autowired
-    private ClassService cService;
+    private ClassService service;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<_ClassDTO> getAll() {
-        return cService.getAll();
+    public ResponseEntity<List<_ClassDTO>> getAll() {
+        return new ResponseEntity<List<_ClassDTO>>(
+                service.getAll(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public _ClassDTO insert(@RequestBody _ClassDTO cDTO) {
-        return cService.insert(cDTO);
+    public ResponseEntity<_ClassDTO> insert(@RequestBody _ClassDTO dto) {
+        return new ResponseEntity<_ClassDTO>(service.insert(dto), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public String update(@PathVariable("id") int id, @RequestBody _ClassDTO cDTO) {
-        cDTO.setClassId(id);
-        cService.update(id, cDTO);
-        return "{\"response\":\"success\"}";
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody _ClassDTO dto) {
+        dto.setClassId(id);
+        service.update(id, dto);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") int id) {
-        cService.delete(id);
-        return "{\"response\":\"success\"}";
+    public ResponseEntity delete(@PathVariable("id") int id) {
+        service.delete(id);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<_ClassDTO> getById(@PathVariable("id") int id) {
-        _ClassDTO cDTO = cService.getById(id);
+        _ClassDTO cDTO = service.getById(id);
         if (cDTO == null) {
             return new ResponseEntity<_ClassDTO>(HttpStatus.NOT_FOUND);
         }

@@ -84,11 +84,17 @@
             <artifactId>Parent-Module</artifactId>            
             <version>1.0</version>
         </dependency>           
-        <!--        <dependency>
+        <dependency>
+            <groupId>com.code-labs</groupId>
+            <artifactId>ExamType-Module</artifactId>            
+            <version>1.0</version>
+        </dependency>  
+        <dependency>
             <groupId>com.code-labs</groupId>
             <artifactId>_Class-Module</artifactId>            
             <version>1.0</version>
-        </dependency>            
+        </dependency>          
+        <!--                  
         <dependency>
             <groupId>com.code-labs</groupId>
             <artifactId>Student-Module</artifactId>            

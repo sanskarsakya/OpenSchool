@@ -34,17 +34,15 @@ public class ExamType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "exam_type_id")
-    private Integer examTypeId;
-    @Basic(optional = false)
+    private Integer examTypeId;    
     @Column(name = "exam_type")
     private String examType;
-    @Column(name = "created_date")
+    @Column(name = "created_date",insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date")
+    @Column(name = "modified_date",nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @Column(name = "status")

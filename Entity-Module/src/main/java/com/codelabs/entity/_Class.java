@@ -35,16 +35,14 @@ public class _Class implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "class_id")
-    private Integer classId;
-    @Basic(optional = false)
+    private Integer classId;    
     @Column(name = "class_name")
     private String className;
-    @Column(name = "created_date")
+    @Column(name = "created_date",insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date")
+    @Column(name = "modified_date",nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @Column(name = "status")

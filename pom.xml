@@ -18,6 +18,7 @@
         <module>Time-Module</module>
         <module>Section-Module</module>
         <module>Subject-Module</module>
+        <module>ExamType-Module</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

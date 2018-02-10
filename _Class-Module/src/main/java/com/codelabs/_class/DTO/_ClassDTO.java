@@ -5,6 +5,7 @@
  */
 package com.codelabs._class.DTO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Date;
 import lombok.Data;
 
@@ -13,10 +14,12 @@ import lombok.Data;
  * @author koirala
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class _ClassDTO {
 
     private Integer classId;
     private String className;
     private Date createdDate;
+    private Date modifiedDate;
     private Boolean status;
 }
