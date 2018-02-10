@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs.studentstatus.DAO.IMPL;
+package com.codelabs.studentstatus.DAO.Impl;
 
 import com.codelabs.core.DAO.Impl.GenericDAOImpl;
 import com.codelabs.entity.StudentStatus;

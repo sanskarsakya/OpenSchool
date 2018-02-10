@@ -5,6 +5,8 @@
  */
 package com.codelabs.studentstatus.DTO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Data;
 
 /**
@@ -12,8 +14,10 @@ import lombok.Data;
  * @author sd14d
  */
 @Data
+@JsonInclude(Include.NON_NULL)
 public class StudentStatusDTO {
-    private Integer studentStatusId; 
+
+    private Integer studentStatusId;
     private String status;
-    
+
 }

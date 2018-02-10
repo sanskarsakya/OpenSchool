@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs.studentstatus.CONTROLLER;
+package com.codelabs.studentstatus.Controller;
 
 import com.codelabs.studentstatus.DTO.StudentStatusDTO;
-import com.codelabs.studentstatus.SERVICE.StudentStatusService;
+import com.codelabs.studentstatus.Service.StudentStatusService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,22 +25,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @CrossOrigin
-@RequestMapping(value = "/studentstatus")
+@RequestMapping(value = "/studentstatuses")
 public class StudentStatusController {
 
     @Autowired
-    StudentStatusService studentStatusService;
+    StudentStatusService service;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<StudentStatusDTO> getAll() {
-        return studentStatusService.getAll();
+    public ResponseEntity<List<StudentStatusDTO>> getAll() {
+        return new ResponseEntity<List<StudentStatusDTO>>(
+                service.getAll(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public StudentStatusDTO save(@RequestBody StudentStatusDTO studentStatusDTO) {
-        return studentStatusService.insert(studentStatusDTO);
+        return service.insert(studentStatusDTO);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -48,7 +50,7 @@ public class StudentStatusController {
     public String update(@PathVariable("id") int id, @RequestBody StudentStatusDTO studentStatusDTO) {
         studentStatusDTO.setStudentStatusId(id);
 
-        studentStatusService.update(id, studentStatusDTO);
+        service.update(id, studentStatusDTO);
         return "success";
 
     }
@@ -56,7 +58,7 @@ public class StudentStatusController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<StudentStatusDTO> getById(@PathVariable("id") int id) {
-        StudentStatusDTO studentStatusDTO = studentStatusService.getById(id);
+        StudentStatusDTO studentStatusDTO = service.getById(id);
         if (studentStatusDTO == null) {
             return new ResponseEntity<StudentStatusDTO>(HttpStatus.NOT_FOUND);
         }
@@ -66,7 +68,7 @@ public class StudentStatusController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable("id") int id) {
-        studentStatusService.delete(id);
+        service.delete(id);
         return "{response:\"success\"}";
     }
 

@@ -7,6 +7,7 @@ package com.codelabs.parent.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.Date;
 import lombok.Data;
 
@@ -15,7 +16,7 @@ import lombok.Data;
  * @author kamal
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(Include.NON_NULL)
 public class ParentDTO {
 
     private Integer parentId;

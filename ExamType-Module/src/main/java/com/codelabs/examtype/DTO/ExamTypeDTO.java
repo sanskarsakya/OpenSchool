@@ -6,6 +6,8 @@
 package com.codelabs.examtype.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.util.Date;
 import lombok.Data;
 
@@ -14,7 +16,7 @@ import lombok.Data;
  * @author puzansakya
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(Include.NON_NULL)
 public class ExamTypeDTO {
 
     private Integer examTypeId;

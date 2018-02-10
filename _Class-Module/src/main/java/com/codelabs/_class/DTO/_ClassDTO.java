@@ -6,6 +6,7 @@
 package com.codelabs._class.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.Date;
 import lombok.Data;
 
@@ -14,7 +15,7 @@ import lombok.Data;
  * @author koirala
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(Include.NON_NULL)
 public class _ClassDTO {
 
     private Integer classId;

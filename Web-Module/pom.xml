@@ -93,7 +93,12 @@
             <groupId>com.code-labs</groupId>
             <artifactId>_Class-Module</artifactId>            
             <version>1.0</version>
-        </dependency>          
+        </dependency>   
+        <dependency>
+            <groupId>com.code-labs</groupId>
+            <artifactId>StudentStatus-Module</artifactId>
+            <version>1.0</version>
+        </dependency>       
         <!--                  
         <dependency>
             <groupId>com.code-labs</groupId>
@@ -109,12 +114,7 @@
             <groupId>com.code-labs</groupId>
             <artifactId>Attendance-Module</artifactId>            
             <version>1.0</version>
-        </dependency>   
-        <dependency>
-            <groupId>com.code-labs</groupId>
-            <artifactId>StudentStatus-Module</artifactId>
-            <version>1.0</version>
-        </dependency>
+        </dependency>           
         <dependency>
             <groupId>com.code-labs</groupId>
             <artifactId>Relation-Module</artifactId>

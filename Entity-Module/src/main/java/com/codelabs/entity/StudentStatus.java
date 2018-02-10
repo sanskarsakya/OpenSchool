@@ -31,11 +31,9 @@ public class StudentStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "student_status_id")
-    private Integer studentStatusId;
-    @Basic(optional = false)
+    private Integer studentStatusId;    
     @Column(name = "status")
     private String status;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")

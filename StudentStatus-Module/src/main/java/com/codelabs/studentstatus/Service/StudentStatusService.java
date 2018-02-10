@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codelabs.studentstatus.SERVICE;
+package com.codelabs.studentstatus.Service;
 
 import com.codelabs.core.Service.GenericService;
 import com.codelabs.studentstatus.DTO.StudentStatusDTO;
