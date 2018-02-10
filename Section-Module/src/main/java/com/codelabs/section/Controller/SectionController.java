@@ -35,29 +35,29 @@ public class SectionController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<SectionDTO> getAll() {
-        return ss.getAll();
+    public ResponseEntity<List<SectionDTO>> getAll() {
+        return new ResponseEntity<>(ss.getAll(), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public SectionDTO insert(@RequestBody SectionDTO t) {        
-        return ss.insert(t);
+    public ResponseEntity<SectionDTO> insert(@RequestBody SectionDTO t) {
+        return new ResponseEntity<SectionDTO>(ss.insert(t), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public String update(@PathVariable("id") int id, @RequestBody SectionDTO t) {
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody SectionDTO t) {
         t.setSectionId(id);
         ss.update(id, t);
-        return "{\"response\":\"success\"}";
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") int id) {
+    public ResponseEntity delete(@PathVariable("id") int id) {
         ss.delete(id);
-        return "{\"response\":\"success\"}";
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
