@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 public class ClassServiceImpl implements ClassService {
 
     @Autowired
-    ClassDAO dao;
+    private ClassDAO dao;
     private _ClassMapper mapper;
 
     public ClassServiceImpl() {

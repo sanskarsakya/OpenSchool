@@ -8,8 +8,10 @@ package com.codelabs.student.Service.Impl;
 import com.codelabs.entity.Student;
 import com.codelabs.student.DAO.StudentDAO;
 import com.codelabs.student.DTO.StudentDTO;
+import com.codelabs.student.Mapper.StudentMapper;
 import com.codelabs.student.Service.StudentService;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,46 +25,48 @@ import org.springframework.stereotype.Service;
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    private StudentDAO sd;
+    private StudentDAO dao;
+    private StudentMapper mapper;
+
+    public StudentServiceImpl() {
+        this.mapper = new StudentMapper();
+    }
 
     @Override
     public List<StudentDTO> getAll() {
-        List<StudentDTO> sDtoList = new ArrayList<>();
-        for (Student student : sd.getAll()) {
-            ModelMapper mapper = new ModelMapper();
-            StudentDTO stdDTO = mapper.map(student, StudentDTO.class);
-            sDtoList.add(stdDTO);
+        List<StudentDTO> dtoList = new ArrayList<>();
+        for (Student entity : dao.getAll()) {
+            dtoList.add(mapper.toDTO(entity));
         }
-        return sDtoList;
+        return dtoList;
     }
 
     @Override
-    public StudentDTO insert(StudentDTO sDTO) {
-        ModelMapper mapper = new ModelMapper();
-        Student student = mapper.map(sDTO, Student.class);
-        student.setPassword(sDTO.getUsername() + "sSample");
-        Student rt = sd.insert(student);
-        return sDTO;
+    public StudentDTO insert(StudentDTO dto) {
+        Student entity = mapper.toEntity(null, dto);
+        entity.setPassword(dto.getUsername() + "123");
+        dto.setStudentId(dao.insert(entity).getStudentId());
+        return dto;
     }
 
     @Override
-    public void update(int id, StudentDTO sDTO) {
-        Student student = new ModelMapper().map(sDTO, Student.class);
-        student.setPassword(sDTO.getUsername() + "sSample");
-        sd.update(student);
+    public void update(int id, StudentDTO dto) {
+        Student entity = dao.getById(id);
+        entity.setModifiedDate(new Date());
+        dao.update(mapper.toEntity(entity, dto));
     }
 
     @Override
     public boolean delete(int id) {
-        return sd.delete(id);
+        return dao.delete(id);
     }
 
     @Override
     public StudentDTO getById(int id) {
-        Student s = sd.getById(id);
-        if (s == null) {
+        Student entity = dao.getById(id);
+        if (entity == null) {
             return null;
         }
-        return new ModelMapper().map(s, StudentDTO.class);
+        return mapper.toDTO(entity);
     }
 }

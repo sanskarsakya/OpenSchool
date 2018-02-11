@@ -34,34 +34,29 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")})
 public class Student implements Serializable {
 
+    @JoinColumn(name = "parent_id", referencedColumnName = "parent_id")
+    @ManyToOne(optional = false)
+    private Parent parentId;
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "student_id")
-    private Integer studentId;
-    @Basic(optional = false)
+    private Integer studentId;    
     @Column(name = "first_name")
-    private String firstName;
-    @Basic(optional = false)
+    private String firstName;    
     @Column(name = "last_name")
-    private String lastName;
-    @Basic(optional = false)
+    private String lastName;    
     @Column(name = "email")
-    private String email;
-    @Basic(optional = false)
+    private String email;    
     @Column(name = "contact_no")
-    private String contactNo;
-    @Basic(optional = false)
+    private String contactNo;    
     @Column(name = "username")
-    private String username;
-    @Basic(optional = false)
+    private String username;    
     @Column(name = "password")
-    private String password;
-    @Basic(optional = false)
+    private String password;    
     @Column(name = "street")
-    private String street;
-    @Basic(optional = false)
+    private String street;    
     @Column(name = "city")
     private String city;
     @Column(name = "created_date")
@@ -244,6 +239,14 @@ public class Student implements Serializable {
     @Override
     public String toString() {
         return "com.codelabs.entity.Student[ studentId=" + studentId + " ]";
+    }
+
+    public Parent getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Parent parentId) {
+        this.parentId = parentId;
     }
     
 }

@@ -9,6 +9,8 @@ import com.codelabs.student.DTO.StudentDTO;
 import com.codelabs.student.Service.StudentService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,40 +27,46 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @CrossOrigin
 @RequestMapping(value = "/students")
 public class StudentController {
+
     @Autowired
-    private StudentService ss;
+    private StudentService service;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<StudentDTO> getAll() {
-        return ss.getAll();
+    public ResponseEntity<List<StudentDTO>> getAll() {
+        return new ResponseEntity<List<StudentDTO>>(
+                service.getAll(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public StudentDTO save(@RequestBody StudentDTO stdDTO) {
-        return ss.insert(stdDTO);
+    public ResponseEntity<StudentDTO> save(@RequestBody StudentDTO dto) {
+        return new ResponseEntity<StudentDTO>(service.insert(dto), HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
     @ResponseBody
-    public String update(@PathVariable("id") int id, @RequestBody StudentDTO stdDTO) {
-        ss.update(id, stdDTO);
-        return "Success";
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody StudentDTO dto) {
+        service.update(id, dto);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public StudentDTO getById(@PathVariable("id") int id) {
-        return ss.getById(id);
+    public ResponseEntity<StudentDTO> getById(@PathVariable("id") int id) {
+        StudentDTO teacher = service.getById(id);
+        if (teacher == null) {
+            return new ResponseEntity<StudentDTO>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<StudentDTO>(teacher, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") int id) {
-        ss.delete(id);
-        return "{response:\"success\"}";
+    public ResponseEntity delete(@PathVariable("id") int id) {
+        service.delete(id);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-    
 }

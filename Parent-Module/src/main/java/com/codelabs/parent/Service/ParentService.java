@@ -13,5 +13,4 @@ import com.codelabs.parent.DTO.ParentDTO;
  * @author Anuzaa_2
  */
 public interface ParentService extends GenericService<ParentDTO> {
-    
 }
