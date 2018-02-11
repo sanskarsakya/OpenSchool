@@ -29,43 +29,44 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ExamController {
 
     @Autowired
-    private ExamService eService;
+    private ExamService service;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<ExamDTO> getAll() {
-        return eService.getAll();
+    public ResponseEntity<List<ExamDTO>> getAll() {
+        return new ResponseEntity<List<ExamDTO>>(
+                service.getAll(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ExamDTO save(@RequestBody ExamDTO e) {
-        return eService.insert(e);
+    public ResponseEntity<ExamDTO> save(@RequestBody ExamDTO dto) {
+        return new ResponseEntity<ExamDTO>(service.insert(dto), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public String update(@PathVariable("id") int id, @RequestBody ExamDTO e) {
-        e.setExamId(id);
-        eService.update(id, e);
-        return "{\"response\":\"success\"}";
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody ExamDTO dto) {
+        service.update(id, dto);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public String delete(@PathVariable("id") int id) {
-        eService.delete(id);
-        return "{\"response\":\"success\"}";
+    public ResponseEntity delete(@PathVariable("id") int id) {
+        service.delete(id);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<ExamDTO> getById(@PathVariable("id") int id) {
-        ExamDTO exam = eService.getById(id);
-        if (exam == null) {
+        ExamDTO entity = service.getById(id);
+        if (entity == null) {
             return new ResponseEntity<ExamDTO>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<ExamDTO>(exam, HttpStatus.OK);
+        return new ResponseEntity<ExamDTO>(entity, HttpStatus.OK);
     }
 
 }

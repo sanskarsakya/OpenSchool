@@ -36,8 +36,7 @@ public class Exam implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     @Column(name = "exam_id")
     private Integer examId;
     @Column(name = "exam_date")

@@ -7,7 +7,6 @@ package com.codelabs.student.DTO;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.codelabs.entity.StudentStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import lombok.Data;

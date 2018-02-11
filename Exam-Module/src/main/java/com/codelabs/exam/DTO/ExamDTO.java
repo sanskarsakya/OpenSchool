@@ -5,6 +5,8 @@
  */
 package com.codelabs.exam.DTO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.Date;
 import lombok.Data;
 
@@ -13,11 +15,23 @@ import lombok.Data;
  * @author Prachin
  */
 @Data
+@JsonInclude(Include.NON_NULL)
 public class ExamDTO {
+
     private Integer examId;
-    private String examTitle;
     private Date examDate;
+    private Double fullMark;
+    private Double passMark;
     private Date createdDate;
-    private Boolean status;
-   
+    private Date modifiedDate;
+    @JsonInclude(Include.NON_DEFAULT)
+    private int classId;
+    private String _class;
+    @JsonInclude(Include.NON_DEFAULT)
+    private int examTypeId;
+    private String examType;
+    @JsonInclude(Include.NON_DEFAULT)
+    private int subjectId;
+    private String subject;
+
 }

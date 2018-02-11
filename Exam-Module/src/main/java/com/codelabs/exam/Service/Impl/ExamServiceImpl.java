@@ -8,10 +8,11 @@ package com.codelabs.exam.Service.Impl;
 import com.codelabs.entity.Exam;
 import com.codelabs.exam.DAO.ExamDAO;
 import com.codelabs.exam.DTO.ExamDTO;
+import com.codelabs.exam.Mapper.ExamMapper;
 import com.codelabs.exam.Service.ExamService;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,46 +24,48 @@ import org.springframework.stereotype.Service;
 public class ExamServiceImpl implements ExamService {
 
     @Autowired
-    private ExamDAO eDAO;
+    private ExamDAO dao;
+    private ExamMapper mapper;
+
+    public ExamServiceImpl() {
+        this.mapper = new ExamMapper();
+    }
 
     @Override
     public List<ExamDTO> getAll() {
-        List<ExamDTO> eDTOList = new ArrayList<>();
-        for (Exam e : eDAO.getAll()) {
-            ModelMapper mapper = new ModelMapper();
-            ExamDTO eDTO = mapper.map(e, ExamDTO.class);
-            eDTOList.add(eDTO);
+        List<ExamDTO> dtoList = new ArrayList<>();
+        for (Exam entity : dao.getAll()) {
+            dtoList.add(mapper.toDTO(entity));
         }
-        return eDTOList;
+        return dtoList;
     }
 
     @Override
-    public ExamDTO insert(ExamDTO e) {
-        ModelMapper mapper = new ModelMapper();
-        Exam exam = mapper.map(e, Exam.class);
-        Exam ex = eDAO.insert(exam);
-        e.setExamId(ex.getExamId());
-        return e;
+    public ExamDTO insert(ExamDTO dto) {
+        Exam entity = mapper.toEntity(null, dto);
+        dto.setExamId(dao.insert(entity).getExamId());
+        return dto;
     }
 
     @Override
-    public void update(int id, ExamDTO e) {
-        Exam exam = new ModelMapper().map(e, Exam.class);
-        eDAO.update(exam);
+    public void update(int id, ExamDTO dto) {
+        Exam entity = dao.getById(id);
+        entity.setModifiedDate(new Date());
+        dao.update(mapper.toEntity(entity, dto));
     }
 
     @Override
     public boolean delete(int id) {
-        return eDAO.delete(id);
+        return dao.delete(id);
     }
 
     @Override
     public ExamDTO getById(int id) {
-        Exam e = eDAO.getById(id);
-        if (e == null) {
+        Exam entity = dao.getById(id);
+        if (entity == null) {
             return null;
         }
-        return new ModelMapper().map(e, ExamDTO.class);
+        return mapper.toDTO(entity);
     }
 
 }
