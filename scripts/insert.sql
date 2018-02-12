@@ -13,6 +13,7 @@ select * from tbl_students;
 -- select * from tbl_attendances;
 -- select * from tbl_class_subjects;
 -- select * from tbl_reports;
+-- select * from tbl_gender;
 --insert into tbl_genders
 insert into tbl_genders(gender) values ('male'),('female'),('others');
 
@@ -48,6 +49,10 @@ insert into tbl_students(first_name,last_name,email,contact_no,gender_id,parent_
 insert into tbl_exam_types (exam_type) values ('first term'),('second term'),('third term');
 
 insert into tbl_exams(subject_id,exam_type_id,exam_date,full_mark,pass_mark,class_id) values (1,1,'2018-02-08 12:59:49.521619',100,30,1);
+insert into tbl_exams(subject_id,exam_type_id,exam_date,full_mark,pass_mark,class_id) values (2,1,'2018-02-08 12:59:49.521619',100,30,1);
+insert into tbl_exams(subject_id,exam_type_id,exam_date,full_mark,pass_mark,class_id) values (3,1,'2018-02-08 12:59:49.521619',100,30,1);
+insert into tbl_exams(subject_id,exam_type_id,exam_date,full_mark,pass_mark,class_id) values (4,1,'2018-02-08 12:59:49.521619',100,30,1);
+insert into tbl_exams(subject_id,exam_type_id,exam_date,full_mark,pass_mark,class_id) values (5,1,'2018-02-08 12:59:49.521619',100,30,1);
 
 insert into tbl_marks(student_id,exam_id,obtained_mark) values(1,1,40);
 
@@ -94,4 +99,5 @@ insert into tbl_marks(student_id,exam_id,obtained_mark) values(1,1,40);
 -- -- insert into tbl_reports (exam_id,student_id,class_subject_id,marks_obtained) values(1,3,1,14);
 -- -- insert into tbl_reports (exam_id,student_id,class_subject_id,marks_obtained) values(1,4,1,14);
 -- -- insert into tbl_reports (exam_id,student_id,class_subject_id,marks_obtained) values(2,4,2,14);
+
 
