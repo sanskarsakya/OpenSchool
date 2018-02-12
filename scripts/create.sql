@@ -131,6 +131,7 @@ create table tbl_students(
     email varchar (100) not null,
     contact_no varchar (50) not null,
     gender_id integer not null,
+    parent_id integer not null,
     username VARCHAR (50) not null,
     password text not null,
     street varchar (50) not null,
@@ -140,7 +141,7 @@ create table tbl_students(
     class_id integer not null,
     status_id integer not null,
     CONSTRAINT fk_status_id_student FOREIGN KEY (status_id) REFERENCES tbl_student_statuses (student_status_id),
-CONSTRAINT fk_parent_id_student FOREIGN KEY (parent_id) REFERENCES tbl_parent(parent_id),
+    CONSTRAINT fk_parent_id_student FOREIGN KEY (parent_id) REFERENCES tbl_parents (parent_id),
     CONSTRAINT fk_class_id_student FOREIGN KEY (class_id) REFERENCES tbl_classes (class_id),
     CONSTRAINT fk_gender_id_student FOREIGN KEY (gender_id) REFERENCES tbl_genders (gender_id)
 );
@@ -279,5 +280,6 @@ create table tbl_marks (
 --     CONSTRAINT fk_student_id_reports FOREIGN KEY (student_id) REFERENCES tbl_students (student_id),
 --     CONSTRAINT fk_class_subject_id_reports FOREIGN KEY (class_subject_id) REFERENCES tbl_class_subjects (class_subject_id)
 -- );
+
 
 
