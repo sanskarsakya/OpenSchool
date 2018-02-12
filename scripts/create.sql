@@ -140,6 +140,7 @@ create table tbl_students(
     class_id integer not null,
     status_id integer not null,
     CONSTRAINT fk_status_id_student FOREIGN KEY (status_id) REFERENCES tbl_student_statuses (student_status_id),
+CONSTRAINT fk_parent_id_student FOREIGN KEY (parent_id) REFERENCES tbl_parent(parent_id),
     CONSTRAINT fk_class_id_student FOREIGN KEY (class_id) REFERENCES tbl_classes (class_id),
     CONSTRAINT fk_gender_id_student FOREIGN KEY (gender_id) REFERENCES tbl_genders (gender_id)
 );

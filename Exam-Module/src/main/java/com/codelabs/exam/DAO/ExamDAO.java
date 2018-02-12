@@ -7,11 +7,14 @@ package com.codelabs.exam.DAO;
 
 import com.codelabs.core.DAO.GenericDAO;
 import com.codelabs.entity.Exam;
+import java.util.List;
 
 /**
  *
  * @author Prachin
  */
-public interface ExamDAO extends GenericDAO<Exam>{
-    
+public interface ExamDAO extends GenericDAO<Exam> {
+
+    List<Exam> getByClassAndExamType(int examTypeId, int classId);
+
 }

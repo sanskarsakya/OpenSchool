@@ -40,10 +40,10 @@ insert into tbl_student_statuses (status) values ('passout'),('left'),('active')
 insert into tbl_subjects(subject_name) values ('math'),('science'),('social studies'),('english'),('nepali');
 
 --insert into tbl_students
-insert into tbl_students(first_name,last_name,email,contact_no,gender_id,username,password,street,city,class_id,status_id) values ('kamal','khanal','kkhanal@gmail.com','98123123',1,'kamalkhnal','password123','kaushaltar','bhaktapar',1,1);
-insert into tbl_students(first_name,last_name,email,contact_no,gender_id,username,password,street,city,class_id,status_id) values ('sumit','duwal','sumitduwal@gmail.com','98123123',1,'sumitduwal','password123','kaushaltar','bhaktapar',1,1);
-insert into tbl_students(first_name,last_name,email,contact_no,gender_id,username,password,street,city,class_id,status_id) values ('nishesh','wyanju','nisheshwyanju@gmail.com','98123123',1,'kamalkhnal','password123','kaushaltar','bhaktapar',1,1);
-insert into tbl_students(first_name,last_name,email,contact_no,gender_id,username,password,street,city,class_id,status_id) values ('puzan','sakya','puzansakya@gmail.com','9849799166',1,'kamalkhnal','password123','kaushaltar','bhaktapar',2,1);
+insert into tbl_students(first_name,last_name,email,contact_no,gender_id,parent_id,username,password,street,city,class_id,status_id) values ('kamal','khanal','kkhanal@gmail.com','98123123',1,1,'kamalkhnal','password123','kaushaltar','bhaktapar',1,1);
+insert into tbl_students(first_name,last_name,email,contact_no,gender_id,parent_id,username,password,street,city,class_id,status_id) values ('sumit','duwal','sumitduwal@gmail.com','98123123',1,1,'sumitduwal','password123','kaushaltar','bhaktapar',1,1);
+insert into tbl_students(first_name,last_name,email,contact_no,gender_id,parent_id,username,password,street,city,class_id,status_id) values ('nishesh','wyanju','nisheshwyanju@gmail.com','98123123',1,1,'kamalkhnal','password123','kaushaltar','bhaktapar',1,1);
+insert into tbl_students(first_name,last_name,email,contact_no,gender_id,parent_id,username,password,street,city,class_id,status_id) values ('puzan','sakya','puzansakya@gmail.com','9849799166',1,1,'kamalkhnal','password123','kaushaltar','bhaktapar',2,1);
 
 insert into tbl_exam_types (exam_type) values ('first term'),('second term'),('third term');
 

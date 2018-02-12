@@ -69,4 +69,12 @@ public class ExamController {
         return new ResponseEntity<ExamDTO>(entity, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/{examId}/class/{classId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<ExamDTO>> getByClassAndExamType(@PathVariable("examId") int examId, @PathVariable("classId") int classId) {
+        return new ResponseEntity<List<ExamDTO>>(
+                service.getByClassAndExamType(examId, classId),
+                HttpStatus.OK);
+    }
+
 }

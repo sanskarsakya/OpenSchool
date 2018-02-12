@@ -28,7 +28,7 @@ public class ExamMapper {
         dtoMapped.setModifiedDate(entity.getModifiedDate());
         dtoMapped.set_class(entity.getClassId().getClassName());
         dtoMapped.setExamType(entity.getExamTypeId().getExamType());
-        dtoMapped.setSubject(entity.getExamTypeId().getExamType());
+        dtoMapped.setSubject(entity.getSubjectId().getSubjectName());
 
         return dtoMapped;
     }
