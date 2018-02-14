@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface GenericDAO<T> {
 
-    List<T> getAll();
+    List<T> getAll(int offset, int limit);
 
     T insert(T t);
 
@@ -22,4 +22,6 @@ public interface GenericDAO<T> {
     boolean delete(int id);
 
     T getById(int id);
+
+    Long count();
 }

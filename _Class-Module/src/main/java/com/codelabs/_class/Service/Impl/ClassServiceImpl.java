@@ -32,9 +32,9 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public List<_ClassDTO> getAll() {
+    public List<_ClassDTO> getAll(int offset, int limit) {
         List<_ClassDTO> dtoList = new ArrayList<>();
-        for (_Class entity : dao.getAll()) {
+        for (_Class entity : dao.getAll(offset, limit)) {
             dtoList.add(mapper.toDTO(entity));
         }
         return dtoList;
@@ -65,5 +65,10 @@ public class ClassServiceImpl implements ClassService {
             return null;
         }
         return mapper.toDTO(entity);
+    }
+
+    @Override
+    public Long count() {
+        return dao.count();
     }
 }

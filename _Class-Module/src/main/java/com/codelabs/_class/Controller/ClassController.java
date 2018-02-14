@@ -7,7 +7,7 @@ package com.codelabs._class.Controller;
 
 import com.codelabs._class.DTO._ClassDTO;
 import com.codelabs._class.Service.ClassService;
-import java.util.List;
+import com.codelabs.core.Wrapper.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -33,9 +34,21 @@ public class ClassController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<_ClassDTO>> getAll() {
-        return new ResponseEntity<List<_ClassDTO>>(
-                service.getAll(),
+    public ResponseEntity<ResponseWrapper<_ClassDTO>> getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer limit) {
+        if (page == null || page == 0 || page < 1) {
+            page = 1;
+        }
+        if (limit == null || limit == 0 || limit > 25) {
+            limit = 25;
+        }
+        int offset = (page - 1) * limit;
+        ResponseWrapper wrapper = new ResponseWrapper();
+        wrapper.setData(service.getAll(offset, limit));
+        wrapper.setPageSize(limit);
+        wrapper.setPageNo(page);
+        wrapper.setTotalItems(service.count());
+        return new ResponseEntity<ResponseWrapper<_ClassDTO>>(
+                wrapper,
                 HttpStatus.OK);
     }
 
@@ -47,7 +60,7 @@ public class ClassController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity update(@PathVariable("id") int id, @RequestBody _ClassDTO dto) {        
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody _ClassDTO dto) {
         service.update(id, dto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

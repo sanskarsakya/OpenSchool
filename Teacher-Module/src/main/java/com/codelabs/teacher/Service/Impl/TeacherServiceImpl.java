@@ -5,9 +5,7 @@
  */
 package com.codelabs.teacher.Service.Impl;
 
-import com.codelabs.entity.Gender;
 import com.codelabs.entity.Teacher;
-//import com.codelabs.teacher.Builder.TeacherBuilder;
 import com.codelabs.teacher.DAO.TeacherDAO;
 import com.codelabs.teacher.DTO.TeacherDTO;
 import com.codelabs.teacher.Service.TeacherService;
@@ -15,7 +13,6 @@ import com.codelabs.teacher.Mapper.TeacherMapper;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,46 +22,51 @@ import org.springframework.stereotype.Service;
  */
 @Service(value = "TeacherService")
 public class TeacherServiceImpl implements TeacherService {
-    
+
     @Autowired
-    private TeacherDAO tDAO;
-    
+    private TeacherDAO dao;
+
     @Override
-    public List<TeacherDTO> getAll() {
+    public List<TeacherDTO> getAll(int offset, int limit) {
         List<TeacherDTO> tDTOList = new ArrayList<>();
-        for (Teacher t : tDAO.getAll()) {
+        for (Teacher t : dao.getAll(offset, limit)) {
             tDTOList.add(new TeacherMapper().toDTO(t));
         }
         return tDTOList;
     }
-    
+
     @Override
-    public TeacherDTO insert(TeacherDTO t) {        
+    public TeacherDTO insert(TeacherDTO t) {
         Teacher teacher = new TeacherMapper().toEntity(null, t);
         teacher.setPassword(t.getUsername() + "123");
-        Teacher rt = tDAO.insert(teacher);
+        Teacher rt = dao.insert(teacher);
         t.setTeacherId(rt.getTeacherId());
         return t;
     }
-    
+
     @Override
     public void update(int id, TeacherDTO t) {
-        Teacher teacher = tDAO.getById(id);
+        Teacher teacher = dao.getById(id);
         teacher.setModifiedDate(new Date());
-        tDAO.update(new TeacherMapper().toEntity(teacher, t));
+        dao.update(new TeacherMapper().toEntity(teacher, t));
     }
-    
+
     @Override
     public boolean delete(int id) {
-        return tDAO.delete(id);
+        return dao.delete(id);
     }
-    
+
     @Override
     public TeacherDTO getById(int id) {
-        Teacher t = tDAO.getById(id);
+        Teacher t = dao.getById(id);
         if (t == null) {
             return null;
         }
         return new TeacherMapper().toDTO(t);
+    }
+
+    @Override
+    public Long count() {
+        return dao.count();
     }
 }

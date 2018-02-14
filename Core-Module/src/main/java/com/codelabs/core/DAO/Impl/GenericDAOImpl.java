@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -75,12 +76,22 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     }
 
     @Override
-    public List<T> getAll() {
+    public List<T> getAll(int offset, int limit) {
         session = sessionFactory.openSession();
-        Criteria criteria = session.createCriteria(paramClass).setMaxResults(10);
+        Criteria criteria = session.createCriteria(paramClass).setFirstResult(offset).setMaxResults(limit);
         List<T> list = criteria.list();
         session.close();
         return list;
+    }
+
+    @Override
+    public Long count() {
+        session = sessionFactory.openSession();
+        Criteria criteriaCount = session.createCriteria(paramClass);
+        criteriaCount.setProjection(Projections.rowCount());
+        Long count = (Long) criteriaCount.uniqueResult();
+        session.close();
+        return count;
     }
 
 }
