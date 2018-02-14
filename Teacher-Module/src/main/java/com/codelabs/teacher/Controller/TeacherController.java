@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TeacherController {
 
     @Autowired
-    private TeacherService tService;
+    private TeacherService service;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
@@ -45,10 +45,10 @@ public class TeacherController {
         }
         int offset = (page - 1) * limit;
         ResponseWrapper wrapper = new ResponseWrapper();
-        wrapper.setData(tService.getAll(offset, limit));
+        wrapper.setData(service.getAll(offset, limit));
         wrapper.setPageSize(limit);
         wrapper.setPageNo(page);
-        wrapper.setTotalItems(tService.count());
+        wrapper.setTotalItems(service.count());
         return new ResponseEntity<ResponseWrapper<TeacherDTO>>(
                 wrapper,
                 HttpStatus.OK);
@@ -57,7 +57,7 @@ public class TeacherController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<TeacherDTO> insert(@RequestBody TeacherDTO t) {
-        return new ResponseEntity<TeacherDTO>(tService.insert(t), HttpStatus.CREATED);
+        return new ResponseEntity<TeacherDTO>(service.insert(t), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -66,21 +66,21 @@ public class TeacherController {
             @PathVariable("id") int id,
             @RequestBody TeacherDTO t) {
         t.setTeacherId(id);
-        tService.update(id, t);
+        service.update(id, t);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity delete(@PathVariable("id") int id) {
-        tService.delete(id);
+        service.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<TeacherDTO> getById(@PathVariable("id") int id) {
-        TeacherDTO teacher = tService.getById(id);
+        TeacherDTO teacher = service.getById(id);
         if (teacher == null) {
             return new ResponseEntity<TeacherDTO>(HttpStatus.NOT_FOUND);
         }

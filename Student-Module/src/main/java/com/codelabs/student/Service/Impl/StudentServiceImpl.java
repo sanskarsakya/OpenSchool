@@ -13,7 +13,6 @@ import com.codelabs.student.Service.StudentService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +32,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDTO> getAll() {
+    public List<StudentDTO> getAll(int offset, int limit) {
         List<StudentDTO> dtoList = new ArrayList<>();
-        for (Student entity : dao.getAll()) {
+        for (Student entity : dao.getAll(offset, limit)) {
             dtoList.add(mapper.toDTO(entity));
         }
         return dtoList;
@@ -68,5 +67,10 @@ public class StudentServiceImpl implements StudentService {
             return null;
         }
         return mapper.toDTO(entity);
+    }
+
+    @Override
+    public Long count() {
+        return dao.count();
     }
 }

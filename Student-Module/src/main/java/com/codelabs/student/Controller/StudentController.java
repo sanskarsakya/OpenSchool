@@ -5,6 +5,7 @@
  */
 package com.codelabs.student.Controller;
 
+import com.codelabs.core.Wrapper.ResponseWrapper;
 import com.codelabs.student.DTO.StudentDTO;
 import com.codelabs.student.Service.StudentService;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -33,9 +35,22 @@ public class StudentController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<StudentDTO>> getAll() {
-        return new ResponseEntity<List<StudentDTO>>(
-                service.getAll(),
+    public ResponseEntity<ResponseWrapper<StudentDTO>> getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer limit) {
+
+        if (page == null || page == 0 || page < 1) {
+            page = 1;
+        }
+        if (limit == null || limit == 0 || limit > 25) {
+            limit = 25;
+        }
+        int offset = (page - 1) * limit;
+        ResponseWrapper wrapper = new ResponseWrapper();
+        wrapper.setData(service.getAll(offset, limit));
+        wrapper.setPageSize(limit);
+        wrapper.setPageNo(page);
+        wrapper.setTotalItems(service.count());
+        return new ResponseEntity<ResponseWrapper<StudentDTO>>(
+                wrapper,
                 HttpStatus.OK);
     }
 

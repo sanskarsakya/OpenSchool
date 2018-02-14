@@ -25,12 +25,12 @@ import org.springframework.stereotype.Service;
 public class SectionServiceImpl implements SectionService {
 
     @Autowired
-    private SectionDAO sd;
+    private SectionDAO dao;
 
     @Override
-    public List<SectionDTO> getAll() {
+    public List<SectionDTO> getAll(int offset, int limit) {
         List<SectionDTO> sDTOList = new ArrayList<>();
-        for (Section s : sd.getAll()) {
+        for (Section s : dao.getAll(offset, limit)) {
             sDTOList.add(new SectionMapper().toDTO(s));
         }
         return sDTOList;
@@ -39,29 +39,34 @@ public class SectionServiceImpl implements SectionService {
     @Override
     public SectionDTO insert(SectionDTO s) {
         Section section = new SectionMapper().toEntity(null, s);
-        Section rs = sd.insert(section);
+        Section rs = dao.insert(section);
         s.setSectionId(rs.getSectionId());
         return s;
     }
 
     @Override
     public void update(int id, SectionDTO s) {
-        Section section = sd.getById(id);
-        sd.update(new SectionMapper().toEntity(section, s));
+        Section section = dao.getById(id);
+        dao.update(new SectionMapper().toEntity(section, s));
     }
 
     @Override
     public boolean delete(int id) {
-        return sd.delete(id);
+        return dao.delete(id);
     }
 
     @Override
     public SectionDTO getById(int id) {
-        Section s = sd.getById(id);
+        Section s = dao.getById(id);
         if (s == null) {
             return null;
         }
         return new SectionMapper().toDTO(s);
+    }
+
+    @Override
+    public Long count() {
+        return dao.count();
     }
 
 }

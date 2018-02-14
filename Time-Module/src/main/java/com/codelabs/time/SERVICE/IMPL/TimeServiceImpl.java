@@ -27,7 +27,7 @@ public class TimeServiceImpl implements TimeService {
     TimeDAO timeDAO;
 
     @Override
-    public List<TimeDTO> getAll() {
+    public List<TimeDTO> getAll(int offset, int limit) {
 //        List<TimeDTO> timeDTO = new ArrayList<>();
 //        for (Time time : timeDAO.getAll()) {
 //            ModelMapper mapper = new ModelMapper();
@@ -66,6 +66,11 @@ public class TimeServiceImpl implements TimeService {
 //        }
 //        return new ModelMapper().map(t, TimeDTO.class);
         return null;
+    }
+
+    @Override
+    public Long count() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

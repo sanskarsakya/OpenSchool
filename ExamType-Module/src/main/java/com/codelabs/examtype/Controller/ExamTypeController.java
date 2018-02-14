@@ -5,6 +5,7 @@
  */
 package com.codelabs.examtype.Controller;
 
+import com.codelabs.core.Wrapper.ResponseWrapper;
 import com.codelabs.examtype.DTO.ExamTypeDTO;
 import com.codelabs.examtype.Service.ExamTypeService;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -29,20 +31,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ExamTypeController {
 
     @Autowired
-    private ExamTypeService es;
+    private ExamTypeService service;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<ExamTypeDTO>> getAll() {
-        return new ResponseEntity<List<ExamTypeDTO>>(
-                es.getAll(),
+    public ResponseEntity<ResponseWrapper<ExamTypeDTO>> getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer limit) {
+        if (page == null || page == 0 || page < 1) {
+            page = 1;
+        }
+        if (limit == null || limit == 0 || limit > 25) {
+            limit = 25;
+        }
+        int offset = (page - 1) * limit;
+        ResponseWrapper wrapper = new ResponseWrapper();
+        wrapper.setData(service.getAll(offset, limit));
+        wrapper.setPageSize(limit);
+        wrapper.setPageNo(page);
+        wrapper.setTotalItems(service.count());
+        return new ResponseEntity<ResponseWrapper<ExamTypeDTO>>(
+                wrapper,
                 HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<ExamTypeDTO> insert(@RequestBody ExamTypeDTO t) {
-        return new ResponseEntity<ExamTypeDTO>(es.insert(t), HttpStatus.CREATED);
+        return new ResponseEntity<ExamTypeDTO>(service.insert(t), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -51,21 +65,21 @@ public class ExamTypeController {
             @PathVariable("id") int id,
             @RequestBody ExamTypeDTO t) {
         t.setExamTypeId(id);
-        es.update(id, t);
+        service.update(id, t);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity delete(@PathVariable("id") int id) {
-        es.delete(id);
+        service.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<ExamTypeDTO> getById(@PathVariable("id") int id) {
-        ExamTypeDTO et = es.getById(id);
+        ExamTypeDTO et = service.getById(id);
         if (et == null) {
             return new ResponseEntity<ExamTypeDTO>(HttpStatus.NOT_FOUND);
         }

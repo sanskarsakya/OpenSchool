@@ -35,7 +35,8 @@ public class TimeController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<TimeDTO> getAll() {
-        return timeService.getAll();
+        //return timeService.getAll();
+        return null;
     }
 
     @RequestMapping(method = RequestMethod.POST)

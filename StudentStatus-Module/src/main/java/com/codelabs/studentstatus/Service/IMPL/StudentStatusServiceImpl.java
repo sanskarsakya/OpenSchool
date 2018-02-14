@@ -32,9 +32,9 @@ public class StudentStatusServiceImpl implements StudentStatusService {
     }
 
     @Override
-    public List<StudentStatusDTO> getAll() {
+    public List<StudentStatusDTO> getAll(int offset, int limit) {
         List<StudentStatusDTO> dtoList = new ArrayList<>();
-        for (StudentStatus entity : dao.getAll()) {
+        for (StudentStatus entity : dao.getAll(offset, limit)) {
             dtoList.add(mapper.toDTO(entity));
         }
         return dtoList;
@@ -64,6 +64,11 @@ public class StudentStatusServiceImpl implements StudentStatusService {
             return null;
         }
         return mapper.toDTO(entity);
+    }   
+
+    @Override
+    public Long count() {
+        return dao.count();
     }
 
 }

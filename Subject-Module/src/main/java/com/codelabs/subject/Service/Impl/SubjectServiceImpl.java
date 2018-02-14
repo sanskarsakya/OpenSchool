@@ -35,9 +35,9 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public List<SubjectDTO> getAll() {
+    public List<SubjectDTO> getAll(int offset, int limit) {
         List<SubjectDTO> dtoList = new ArrayList<>();
-        for (Subject entity : dao.getAll()) {
+        for (Subject entity : dao.getAll(offset, limit)) {
             dtoList.add(mapper.toDTO(entity));
         }
         return dtoList;
@@ -69,5 +69,10 @@ public class SubjectServiceImpl implements SubjectService {
             return null;
         }
         return mapper.toDTO(entity);
+    }
+
+    @Override
+    public Long count() {
+        return dao.count();
     }
 }

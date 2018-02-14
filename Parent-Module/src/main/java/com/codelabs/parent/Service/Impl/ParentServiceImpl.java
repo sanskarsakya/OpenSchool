@@ -25,12 +25,12 @@ import org.springframework.stereotype.Service;
 public class ParentServiceImpl implements ParentService {
 
     @Autowired
-    private ParentDAO pd;
+    private ParentDAO dao;
 
     @Override
-    public List<ParentDTO> getAll() {
+    public List<ParentDTO> getAll(int offset, int limit) {
         List<ParentDTO> pDTOList = new ArrayList<>();
-        for (Parent parent : pd.getAll()) {
+        for (Parent parent : dao.getAll(offset, limit)) {
             pDTOList.add(new ParentMapper().toDTO(parent));
         }
         return pDTOList;
@@ -40,7 +40,7 @@ public class ParentServiceImpl implements ParentService {
     public ParentDTO insert(ParentDTO pDTO) {
         Parent parent = new ParentMapper().toEntity(null, pDTO);
         parent.setPassword(pDTO.getUsername() + "123");
-        Parent rp = pd.insert(parent);
+        Parent rp = dao.insert(parent);
         pDTO.setParentId(rp.getParentId());
         return pDTO;
 
@@ -48,14 +48,14 @@ public class ParentServiceImpl implements ParentService {
 
     @Override
     public void update(int id, ParentDTO pDTO) {
-        Parent parent = pd.getById(id);
+        Parent parent = dao.getById(id);
         parent.setModifiedDate(new Date());
-        pd.update(new ParentMapper().toEntity(parent, pDTO));
+        dao.update(new ParentMapper().toEntity(parent, pDTO));
     }
 
     @Override
     public ParentDTO getById(int id) {
-        Parent parent = pd.getById(id);
+        Parent parent = dao.getById(id);
         if (parent == null) {
             return null;
         }
@@ -64,7 +64,12 @@ public class ParentServiceImpl implements ParentService {
 
     @Override
     public boolean delete(int id) {
-        return pd.delete(id);
+        return dao.delete(id);
+    }
+
+    @Override
+    public Long count() {
+        return dao.count();
     }
 
 }

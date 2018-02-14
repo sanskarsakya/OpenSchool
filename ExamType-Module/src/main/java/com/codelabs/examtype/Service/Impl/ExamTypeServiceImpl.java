@@ -24,12 +24,12 @@ import org.springframework.stereotype.Service;
 public class ExamTypeServiceImpl implements ExamTypeService {
 
     @Autowired
-    private ExamTypeDAO ed;
+    private ExamTypeDAO dao;
 
     @Override
-    public List<ExamTypeDTO> getAll() {
+    public List<ExamTypeDTO> getAll(int offset, int limit) {
         List<ExamTypeDTO> eDTOList = new ArrayList<>();
-        for (ExamType et : ed.getAll()) {
+        for (ExamType et : dao.getAll(offset, limit)) {
             eDTOList.add(new ExamTypeMapper().toDTO(et));
         }
         return eDTOList;
@@ -38,30 +38,35 @@ public class ExamTypeServiceImpl implements ExamTypeService {
     @Override
     public ExamTypeDTO insert(ExamTypeDTO et) {
         ExamType examType = new ExamTypeMapper().toEntity(null, et);
-        ExamType ret = ed.insert(examType);
+        ExamType ret = dao.insert(examType);
         et.setExamTypeId(ret.getExamTypeId());
         return et;
     }
 
     @Override
     public void update(int id, ExamTypeDTO et) {
-        ExamType etMapped = ed.getById(id);
+        ExamType etMapped = dao.getById(id);
         etMapped.setModifiedDate(new Date());
-        ed.update(new ExamTypeMapper().toEntity(etMapped, et));
+        dao.update(new ExamTypeMapper().toEntity(etMapped, et));
     }
 
     @Override
     public boolean delete(int id) {
-        return ed.delete(id);
+        return dao.delete(id);
     }
 
     @Override
     public ExamTypeDTO getById(int id) {
-        ExamType et = ed.getById(id);
+        ExamType et = dao.getById(id);
         if (et == null) {
             return null;
         }
         return new ExamTypeMapper().toDTO(et);
+    }
+
+    @Override
+    public Long count() {
+        return dao.count();
     }
 
 }
