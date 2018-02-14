@@ -15,7 +15,7 @@
               p:password="${jdbc.password}"/>                        
     
     <bean id="sessionFactory" class = "org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref = "dataSource"/>org.springframework.orm.hibernate4.LocalSessionFactoryBean
+        <property name="dataSource" ref = "dataSource"/>
         <property name="packagesToScan" value="com.codelabs.entity"/>              
         <property name="hibernateProperties">
             <props>
