@@ -6,6 +6,7 @@
 package com.codelabs.section.Service.Impl;
 
 import com.codelabs.core.Service.GenericService;
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.entity.Section;
 import com.codelabs.section.DAO.SectionDAO;
 import com.codelabs.section.DTO.SectionDTO;
@@ -28,9 +29,9 @@ public class SectionServiceImpl implements SectionService {
     private SectionDAO dao;
 
     @Override
-    public List<SectionDTO> getAll(int offset, int limit) {
+    public List<SectionDTO> getAll(ParamWrapper pw, int offset, int limit) {
         List<SectionDTO> sDTOList = new ArrayList<>();
-        for (Section s : dao.getAll(offset, limit)) {
+        for (Section s : dao.getAll(pw, offset, limit)) {
             sDTOList.add(new SectionMapper().toDTO(s));
         }
         return sDTOList;
@@ -64,9 +65,9 @@ public class SectionServiceImpl implements SectionService {
         return new SectionMapper().toDTO(s);
     }
 
-    @Override
-    public Long count() {
-        return dao.count();
-    }
+   @Override
+    public Long count(ParamWrapper pw) {
+        return dao.count(pw);
+    }  
 
 }

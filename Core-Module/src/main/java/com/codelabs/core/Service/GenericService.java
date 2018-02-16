@@ -5,6 +5,7 @@
  */
 package com.codelabs.core.Service;
 
+import com.codelabs.core.Wrapper.ParamWrapper;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface GenericService<T> {
 
-    List<T> getAll(int offset, int limit);
+    List<T> getAll(ParamWrapper pw, int offset, int limit);    
 
     T insert(T t);
 
@@ -23,5 +24,5 @@ public interface GenericService<T> {
 
     T getById(int id);
 
-    Long count();
+    Long count(ParamWrapper pw);
 }

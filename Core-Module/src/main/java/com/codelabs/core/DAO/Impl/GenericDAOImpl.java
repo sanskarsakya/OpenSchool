@@ -6,13 +6,21 @@
 package com.codelabs.core.DAO.Impl;
 
 import com.codelabs.core.DAO.GenericDAO;
+import java.util.HashMap;
+import com.codelabs.core.DTO.Parameters;
+import com.codelabs.core.Wrapper.ParamWrapper;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -74,21 +82,76 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
         return success;
     }
+  
 
     @Override
-    public List<T> getAll(int offset, int limit) {
+    public List<T> getAll(ParamWrapper pw, int offset, int limit) {
         session = sessionFactory.openSession();
         Criteria criteria = session.createCriteria(paramClass).setFirstResult(offset).setMaxResults(limit);
+        if (pw != null) {
+            if (pw.getCompareType() == 1) {
+                Conjunction conjunction = Restrictions.conjunction();
+                for (Parameters parameter : pw.getParametersList()) {
+                    Criterion crit;
+                    if (parameter.getParamType() == 1) {
+                        crit = Restrictions.eq(parameter.getParamName(), Integer.parseInt(parameter.getParamValue()));
+                    } else {
+                        crit = Restrictions.eq(parameter.getParamName(), parameter.getParamValue());
+                    }
+                    conjunction.add(crit);
+                }
+                criteria.add(conjunction);
+            } else {
+                Disjunction disjunction = Restrictions.disjunction();
+                for (Parameters parameter : pw.getParametersList()) {
+                    Criterion crit;
+                    if (parameter.getParamType() == 1) {
+                        crit = Restrictions.eq(parameter.getParamName(), Integer.parseInt(parameter.getParamValue()));
+                    } else {
+                        crit = Restrictions.eq(parameter.getParamName(), parameter.getParamValue());
+                    }
+                    disjunction.add(crit);
+                }
+                criteria.add(disjunction);
+            }
+        }
         List<T> list = criteria.list();
         session.close();
         return list;
     }
 
     @Override
-    public Long count() {
+    public Long count(ParamWrapper pw) {
         session = sessionFactory.openSession();
         Criteria criteriaCount = session.createCriteria(paramClass);
         criteriaCount.setProjection(Projections.rowCount());
+        if (pw != null) {
+            if (pw.getCompareType() == 1) {
+                Conjunction conjunction = Restrictions.conjunction();
+                for (Parameters parameter : pw.getParametersList()) {
+                    Criterion crit;
+                    if (parameter.getParamType() == 1) {
+                        crit = Restrictions.eq(parameter.getParamName(), Integer.parseInt(parameter.getParamValue()));
+                    } else {
+                        crit = Restrictions.eq(parameter.getParamName(), parameter.getParamValue());
+                    }
+                    conjunction.add(crit);
+                }
+                criteriaCount.add(conjunction);
+            } else {
+                Disjunction disjunction = Restrictions.disjunction();
+                for (Parameters parameter : pw.getParametersList()) {
+                    Criterion crit;
+                    if (parameter.getParamType() == 1) {
+                        crit = Restrictions.eq(parameter.getParamName(), Integer.parseInt(parameter.getParamValue()));
+                    } else {
+                        crit = Restrictions.eq(parameter.getParamName(), parameter.getParamValue());
+                    }
+                    disjunction.add(crit);
+                }
+                criteriaCount.add(disjunction);
+            }
+        }
         Long count = (Long) criteriaCount.uniqueResult();
         session.close();
         return count;

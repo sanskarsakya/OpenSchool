@@ -53,10 +53,10 @@ public class ParentController {
         }
         int offset = (page - 1) * limit;
         ResponseWrapper wrapper = new ResponseWrapper();
-        wrapper.setData(service.getAll(offset, limit));
+        wrapper.setData(service.getAll(null, offset, limit));
         wrapper.setPageSize(limit);
         wrapper.setPageNo(page);
-        wrapper.setTotalItems(service.count());
+        wrapper.setTotalItems(service.count(null));
         return new ResponseEntity<ResponseWrapper<ParentDTO>>(
                 wrapper,
                 HttpStatus.OK);

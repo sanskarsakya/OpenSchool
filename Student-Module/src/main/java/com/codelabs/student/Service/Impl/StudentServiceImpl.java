@@ -5,6 +5,7 @@
  */
 package com.codelabs.student.Service.Impl;
 
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.entity.Student;
 import com.codelabs.student.DAO.StudentDAO;
 import com.codelabs.student.DTO.StudentDTO;
@@ -32,9 +33,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDTO> getAll(int offset, int limit) {
+    public List<StudentDTO> getAll(ParamWrapper pw, int offset, int limit) {
         List<StudentDTO> dtoList = new ArrayList<>();
-        for (Student entity : dao.getAll(offset, limit)) {
+        for (Student entity : dao.getAll(pw, offset, limit)) {
             dtoList.add(mapper.toDTO(entity));
         }
         return dtoList;
@@ -69,8 +70,8 @@ public class StudentServiceImpl implements StudentService {
         return mapper.toDTO(entity);
     }
 
-    @Override
-    public Long count() {
-        return dao.count();
-    }
+   @Override
+    public Long count(ParamWrapper pw) {
+        return dao.count(pw);
+    }  
 }

@@ -5,6 +5,7 @@
  */
 package com.codelabs.examtype.Service.Impl;
 
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.entity.ExamType;
 import com.codelabs.examtype.DAO.ExamTypeDAO;
 import com.codelabs.examtype.DTO.ExamTypeDTO;
@@ -27,9 +28,9 @@ public class ExamTypeServiceImpl implements ExamTypeService {
     private ExamTypeDAO dao;
 
     @Override
-    public List<ExamTypeDTO> getAll(int offset, int limit) {
+    public List<ExamTypeDTO> getAll(ParamWrapper pw, int offset, int limit) {
         List<ExamTypeDTO> eDTOList = new ArrayList<>();
-        for (ExamType et : dao.getAll(offset, limit)) {
+        for (ExamType et : dao.getAll(pw, offset, limit)) {
             eDTOList.add(new ExamTypeMapper().toDTO(et));
         }
         return eDTOList;
@@ -65,8 +66,7 @@ public class ExamTypeServiceImpl implements ExamTypeService {
     }
 
     @Override
-    public Long count() {
-        return dao.count();
+    public Long count(ParamWrapper pw) {
+        return dao.count(pw);
     }
-
 }

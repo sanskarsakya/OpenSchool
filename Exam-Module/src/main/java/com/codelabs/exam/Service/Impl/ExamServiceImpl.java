@@ -5,6 +5,7 @@
  */
 package com.codelabs.exam.Service.Impl;
 
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.entity.Exam;
 import com.codelabs.exam.DAO.ExamDAO;
 import com.codelabs.exam.DTO.ExamDTO;
@@ -32,9 +33,9 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public List<ExamDTO> getAll(int offset, int limit) {
+    public List<ExamDTO> getAll(ParamWrapper pw, int offset, int limit) {
         List<ExamDTO> dtoList = new ArrayList<>();
-        for (Exam entity : dao.getAll(offset, limit)) {
+        for (Exam entity : dao.getAll(pw, offset, limit)) {
             dtoList.add(mapper.toDTO(entity));
         }
         return dtoList;
@@ -78,8 +79,8 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public Long count() {
-        return dao.count();
+    public Long count(ParamWrapper pw) {
+        return dao.count(pw);
     }
 
 }

@@ -45,10 +45,10 @@ public class StudentController {
         }
         int offset = (page - 1) * limit;
         ResponseWrapper wrapper = new ResponseWrapper();
-        wrapper.setData(service.getAll(offset, limit));
+        wrapper.setData(service.getAll(null, offset, limit));
         wrapper.setPageSize(limit);
         wrapper.setPageNo(page);
-        wrapper.setTotalItems(service.count());
+        wrapper.setTotalItems(service.count(null));
         return new ResponseEntity<ResponseWrapper<StudentDTO>>(
                 wrapper,
                 HttpStatus.OK);
@@ -60,7 +60,7 @@ public class StudentController {
         return new ResponseEntity<StudentDTO>(service.insert(dto), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity update(@PathVariable("id") int id, @RequestBody StudentDTO dto) {
         service.update(id, dto);

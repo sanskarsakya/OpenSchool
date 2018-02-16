@@ -32,6 +32,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "_Class.findAll", query = "SELECT _ FROM _Class _")})
 public class _Class implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
+    private List<Subject> subjectList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -153,6 +156,14 @@ public class _Class implements Serializable {
     @Override
     public String toString() {
         return "com.codelabs.entity._Class[ classId=" + classId + " ]";
+    }
+
+    public List<Subject> getSubjectList() {
+        return subjectList;
+    }
+
+    public void setSubjectList(List<Subject> subjectList) {
+        this.subjectList = subjectList;
     }
     
 }

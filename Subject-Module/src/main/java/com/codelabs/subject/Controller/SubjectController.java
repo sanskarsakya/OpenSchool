@@ -5,9 +5,13 @@
  */
 package com.codelabs.subject.Controller;
 
+import com.codelabs.core.DTO.Parameters;
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.core.Wrapper.ResponseWrapper;
 import com.codelabs.subject.DTO.SubjectDTO;
 import com.codelabs.subject.Service.SubjectService;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,9 +33,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @CrossOrigin
 @RequestMapping(value = "/subjects")
 public class SubjectController {
-   @Autowired
+
+    @Autowired
     private SubjectService service;
-    
+
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<ResponseWrapper<SubjectDTO>> getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer limit) {
@@ -44,10 +49,10 @@ public class SubjectController {
         }
         int offset = (page - 1) * limit;
         ResponseWrapper wrapper = new ResponseWrapper();
-        wrapper.setData(service.getAll(offset, limit));
+        wrapper.setData(service.getAll(null, offset, limit));
         wrapper.setPageSize(limit);
         wrapper.setPageNo(page);
-        wrapper.setTotalItems(service.count());
+        wrapper.setTotalItems(service.count(null));
         return new ResponseEntity<ResponseWrapper<SubjectDTO>>(
                 wrapper,
                 HttpStatus.OK);
@@ -55,13 +60,13 @@ public class SubjectController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public  ResponseEntity<SubjectDTO>insert(@RequestBody SubjectDTO dto) {
-        return new ResponseEntity<SubjectDTO>(service.insert(dto), HttpStatus.CREATED);      
+    public ResponseEntity<SubjectDTO> insert(@RequestBody SubjectDTO dto) {
+        return new ResponseEntity<SubjectDTO>(service.insert(dto), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity update(@PathVariable("id") int id, @RequestBody SubjectDTO dto) {        
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody SubjectDTO dto) {
         service.update(id, dto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -82,5 +87,70 @@ public class SubjectController {
         }
         return new ResponseEntity<SubjectDTO>(dto, HttpStatus.OK);
     }
- 
+
+    @RequestMapping(value = "/class/{classId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper<SubjectDTO>> getSubjectByClass(@PathVariable("classId") String classId, @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer limit) {
+        if (page == null || page == 0 || page < 1) {
+            page = 1;
+        }
+        if (limit == null || limit == 0 || limit > 25) {
+            limit = 25;
+        }
+        int offset = (page - 1) * limit;
+       
+         //search criteria list       
+        List<Parameters> parameterList = new ArrayList<>();
+        parameterList.add(new Parameters("classId.classId", classId, 1));
+        //                  __
+        //                  ||
+        //                  ||
+        //                  ||
+        //                 \  /
+        //                  \/
+        ParamWrapper pw = new ParamWrapper(parameterList, 1);
+
+        ResponseWrapper wrapper = new ResponseWrapper();
+        
+        wrapper.setData(service.getAll(pw, offset, limit));
+        wrapper.setPageSize(limit);
+        wrapper.setPageNo(page);
+        wrapper.setTotalItems(service.count(pw));
+        return new ResponseEntity<ResponseWrapper<SubjectDTO>>(
+                wrapper,
+                HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/search/{param}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper<SubjectDTO>> search(@PathVariable("param") String param, @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer limit) {
+        if (page == null || page == 0 || page < 1) {
+            page = 1;
+        }
+        if (limit == null || limit == 0 || limit > 25) {
+            limit = 25;
+        }
+        int offset = (page - 1) * limit;
+
+        //search criteria list       
+        List<Parameters> parameterList = new ArrayList<>();
+        parameterList.add(new Parameters("subjectName", param, 2));
+        //                  __
+        //                  ||
+        //                  ||
+        //                  ||
+        //                 \  /
+        //                  \/
+        ParamWrapper pw = new ParamWrapper(parameterList, 2);
+
+        ResponseWrapper wrapper = new ResponseWrapper();
+        wrapper.setData(service.getAll(pw, offset, limit));
+        wrapper.setPageSize(limit);
+        wrapper.setPageNo(page);
+        wrapper.setTotalItems(service.count(pw));
+        return new ResponseEntity<ResponseWrapper<SubjectDTO>>(
+                wrapper,
+                HttpStatus.OK);
+    }
+
 }

@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,6 +33,13 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Subject.findAll", query = "SELECT s FROM Subject s")})
 public class Subject implements Serializable {
+
+    @JoinColumn(name = "class_id", referencedColumnName = "class_id")
+    @ManyToOne(optional = false)
+    private _Class classId;
+    @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
+    @ManyToOne(optional = false)
+    private Teacher teacherId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -116,6 +125,22 @@ public class Subject implements Serializable {
     @Override
     public String toString() {
         return "com.codelabs.entity.Subject[ subjectId=" + subjectId + " ]";
+    }
+
+    public _Class getClassId() {
+        return classId;
+    }
+
+    public void setClassId(_Class classId) {
+        this.classId = classId;
+    }
+
+    public Teacher getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Teacher teacherId) {
+        this.teacherId = teacherId;
     }
 
 }

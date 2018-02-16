@@ -8,6 +8,7 @@ package com.codelabs.subject.DAO.Impl;
 import com.codelabs.core.DAO.Impl.GenericDAOImpl;
 import com.codelabs.entity.Subject;
 import com.codelabs.subject.DAO.SubjectDAO;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,5 +17,18 @@ import org.springframework.stereotype.Repository;
  */
 @Repository(value = "SubjectDAO")
 public class SubjectDAOImpl extends GenericDAOImpl<Subject> implements SubjectDAO {
-    
+
+    @Override
+    public List<Subject> getSubjectByClass(int classId, int offset, int limit) {
+         session = sessionFactory.openSession();
+        List<Subject> subjectList = session
+                .createQuery("from Subject where classId.classId=:classId")
+                .setParameter("classId", classId)
+                .list();
+        session.close();
+        return subjectList;
+    }
+
+  
+
 }

@@ -7,11 +7,14 @@ package com.codelabs.subject.DAO;
 
 import com.codelabs.core.DAO.GenericDAO;
 import com.codelabs.entity.Subject;
+import java.util.List;
 
 /**
  *
  * @author Anuzaa_2
  */
-public interface SubjectDAO extends GenericDAO<Subject>{
-    
+public interface SubjectDAO extends GenericDAO<Subject> {
+
+    List<Subject> getSubjectByClass(int classId,int offset, int limit);
+
 }

@@ -119,8 +119,12 @@ create table tbl_subjects (
     subject_id serial primary key not null,
     subject_name varchar(50) not null,
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    teacher_id integer not null,
+    class_id integer not null,
     modified_date TIMESTAMP DEFAULT NULL,
-    status boolean default false
+    status boolean default false,
+    constraint fk_teacher_id_subject FOREIGN KEY (teacher_id) REFERENCES tbl_teachers (teacher_id),
+    constraint fk_class_id_subject FOREIGN KEY (class_id) REFERENCES tbl_classes (class_id)
 );
 
 --create student table

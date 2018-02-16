@@ -6,6 +6,8 @@
 package com.codelabs.subject.Mapper;
 
 import com.codelabs.entity.Subject;
+import com.codelabs.entity.Teacher;
+import com.codelabs.entity._Class;
 import com.codelabs.subject.DTO.SubjectDTO;
 
 /**
@@ -21,6 +23,11 @@ public class SubjectMapper {
         dtoMapped.setCreatedDate(entity.getCreatedDate());
         dtoMapped.setModifiedDate(entity.getModifiedDate());
         dtoMapped.setStatus(entity.getStatus());
+        dtoMapped.setTeacherId(entity.getTeacherId().getTeacherId());
+        dtoMapped.setTeacherFirstName(entity.getTeacherId().getFirstName());
+        dtoMapped.setTeacherLastName(entity.getTeacherId().getLastName());
+        dtoMapped.setClassId(entity.getClassId().getClassId());
+        dtoMapped.setClassName(entity.getClassId().getClassName());
 
         return dtoMapped;
 
@@ -40,9 +47,17 @@ public class SubjectMapper {
         if (dto.getCreatedDate() != null) {
             entityMapped.setCreatedDate(dto.getCreatedDate());
         }
-
         if (dto.getStatus() != null) {
             entityMapped.setStatus(dto.getStatus());
+        }
+        if (dto.getTeacherId() != 0) {
+            entityMapped.setTeacherId(new Teacher(dto.getTeacherId()));
+        }
+        if (dto.getTeacherId() != 0) {
+            entityMapped.setTeacherId(new Teacher(dto.getTeacherId()));
+        }
+        if (dto.getClassId() != 0) {
+            entityMapped.setClassId(new _Class(dto.getClassId()));
         }
 
         return entityMapped;

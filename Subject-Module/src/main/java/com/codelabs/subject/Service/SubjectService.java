@@ -7,11 +7,12 @@ package com.codelabs.subject.Service;
 
 import com.codelabs.core.Service.GenericService;
 import com.codelabs.subject.DTO.SubjectDTO;
+import java.util.List;
 
 /**
  *
  * @author Anuzaa_2
  */
 public interface SubjectService extends GenericService<SubjectDTO> {
-    
+
 }

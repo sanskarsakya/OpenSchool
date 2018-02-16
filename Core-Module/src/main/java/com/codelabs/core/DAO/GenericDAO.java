@@ -5,6 +5,7 @@
  */
 package com.codelabs.core.DAO;
 
+import com.codelabs.core.Wrapper.ParamWrapper;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface GenericDAO<T> {
 
-    List<T> getAll(int offset, int limit);
+    List<T> getAll(ParamWrapper pw, int offset, int limit);
 
     T insert(T t);
 
@@ -23,5 +24,5 @@ public interface GenericDAO<T> {
 
     T getById(int id);
 
-    Long count();
+    Long count(ParamWrapper pw);
 }

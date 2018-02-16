@@ -23,4 +23,11 @@ public class SubjectDTO {
     private Date createdDate;
     private Date modifiedDate;
     private Boolean status;
+    @JsonInclude(Include.NON_DEFAULT)
+    private int teacherId;
+    private String teacherFirstName;
+    private String teacherLastName;
+    @JsonInclude(Include.NON_DEFAULT)
+    private int classId;
+    private String className;
 }

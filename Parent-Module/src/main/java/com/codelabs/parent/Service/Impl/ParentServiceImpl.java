@@ -5,6 +5,7 @@
  */
 package com.codelabs.parent.Service.Impl;
 
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.entity.Parent;
 import com.codelabs.parent.DAO.ParentDAO;
 import com.codelabs.parent.DTO.ParentDTO;
@@ -28,9 +29,9 @@ public class ParentServiceImpl implements ParentService {
     private ParentDAO dao;
 
     @Override
-    public List<ParentDTO> getAll(int offset, int limit) {
+    public List<ParentDTO> getAll(ParamWrapper pw, int offset, int limit) {
         List<ParentDTO> pDTOList = new ArrayList<>();
-        for (Parent parent : dao.getAll(offset, limit)) {
+        for (Parent parent : dao.getAll(pw, offset, limit)) {
             pDTOList.add(new ParentMapper().toDTO(parent));
         }
         return pDTOList;
@@ -68,8 +69,7 @@ public class ParentServiceImpl implements ParentService {
     }
 
     @Override
-    public Long count() {
-        return dao.count();
+    public Long count(ParamWrapper pw) {
+        return dao.count(pw);
     }
-
 }

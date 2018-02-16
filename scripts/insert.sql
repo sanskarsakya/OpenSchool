@@ -13,7 +13,7 @@ select * from tbl_students;
 -- select * from tbl_attendances;
 -- select * from tbl_class_subjects;
 -- select * from tbl_reports;
--- select * from tbl_gender;
+-- select * from tbl_genders;
 --insert into tbl_genders
 insert into tbl_genders(gender) values ('male'),('female'),('others');
 
@@ -38,7 +38,7 @@ insert into tbl_sections(section_name,class_id,teacher_id) values ('A',1,2),('B'
 insert into tbl_student_statuses (status) values ('passout'),('left'),('active'),('transferred');
 
 --insert into tbl_subjects
-insert into tbl_subjects(subject_name) values ('math'),('science'),('social studies'),('english'),('nepali');
+insert into tbl_subjects(subject_name,class_id,teacher_id) values ('math',1,1),('science',1,2),('social studies',1,3),('english',2,1),('nepali',2,2);
 
 --insert into tbl_students
 insert into tbl_students(first_name,last_name,email,contact_no,gender_id,parent_id,username,password,street,city,class_id,status_id) values ('kamal','khanal','kkhanal@gmail.com','98123123',1,1,'kamalkhnal','password123','kaushaltar','bhaktapar',1,1);

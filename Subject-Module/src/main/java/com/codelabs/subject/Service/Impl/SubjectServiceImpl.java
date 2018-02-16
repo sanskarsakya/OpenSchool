@@ -5,6 +5,7 @@
  */
 package com.codelabs.subject.Service.Impl;
 
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.entity.Subject;
 import com.codelabs.subject.DAO.SubjectDAO;
 import com.codelabs.subject.DTO.SubjectDTO;
@@ -35,14 +36,14 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public List<SubjectDTO> getAll(int offset, int limit) {
+    public List<SubjectDTO> getAll(ParamWrapper pw, int offset, int limit) {
         List<SubjectDTO> dtoList = new ArrayList<>();
-        for (Subject entity : dao.getAll(offset, limit)) {
+        for (Subject entity : dao.getAll(pw, offset, limit)) {
             dtoList.add(mapper.toDTO(entity));
         }
         return dtoList;
 
-    }
+    }  
 
     @Override
     public SubjectDTO insert(SubjectDTO dto) {
@@ -72,7 +73,8 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public Long count() {
-        return dao.count();
-    }
+    public Long count(ParamWrapper pw) {
+        return dao.count(pw);
+    }  
+   
 }

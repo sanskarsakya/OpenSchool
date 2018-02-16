@@ -9,6 +9,7 @@ import com.codelabs._class.DAO.ClassDAO;
 import com.codelabs._class.DTO._ClassDTO;
 import com.codelabs._class.Mapper._ClassMapper;
 import com.codelabs._class.Service.ClassService;
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.entity._Class;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,9 +33,9 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public List<_ClassDTO> getAll(int offset, int limit) {
+    public List<_ClassDTO> getAll(ParamWrapper pw, int offset, int limit) {
         List<_ClassDTO> dtoList = new ArrayList<>();
-        for (_Class entity : dao.getAll(offset, limit)) {
+        for (_Class entity : dao.getAll(pw, offset, limit)) {
             dtoList.add(mapper.toDTO(entity));
         }
         return dtoList;
@@ -68,7 +69,7 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public Long count() {
-        return dao.count();
+    public Long count(ParamWrapper pw) {
+        return dao.count(pw);
     }
 }

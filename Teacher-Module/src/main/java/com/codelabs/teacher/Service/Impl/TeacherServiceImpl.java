@@ -5,6 +5,7 @@
  */
 package com.codelabs.teacher.Service.Impl;
 
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.entity.Teacher;
 import com.codelabs.teacher.DAO.TeacherDAO;
 import com.codelabs.teacher.DTO.TeacherDTO;
@@ -27,9 +28,9 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherDAO dao;
 
     @Override
-    public List<TeacherDTO> getAll(int offset, int limit) {
+    public List<TeacherDTO> getAll(ParamWrapper pw, int offset, int limit) {
         List<TeacherDTO> tDTOList = new ArrayList<>();
-        for (Teacher t : dao.getAll(offset, limit)) {
+        for (Teacher t : dao.getAll(pw, offset, limit)) {
             tDTOList.add(new TeacherMapper().toDTO(t));
         }
         return tDTOList;
@@ -65,8 +66,8 @@ public class TeacherServiceImpl implements TeacherService {
         return new TeacherMapper().toDTO(t);
     }
 
-    @Override
-    public Long count() {
-        return dao.count();
-    }
+     @Override
+    public Long count(ParamWrapper pw) {
+        return dao.count(pw);
+    }  
 }

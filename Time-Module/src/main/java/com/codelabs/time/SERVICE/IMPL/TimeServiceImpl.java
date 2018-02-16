@@ -5,6 +5,7 @@
  */
 package com.codelabs.time.SERVICE.IMPL;
 
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.entity.StudentStatus;
 //import com.codelabs.entity.Time;
 import com.codelabs.time.DAO.TimeDAO;
@@ -25,17 +26,6 @@ public class TimeServiceImpl implements TimeService {
 
     @Autowired
     TimeDAO timeDAO;
-
-    @Override
-    public List<TimeDTO> getAll(int offset, int limit) {
-//        List<TimeDTO> timeDTO = new ArrayList<>();
-//        for (Time time : timeDAO.getAll()) {
-//            ModelMapper mapper = new ModelMapper();
-//            TimeDTO tDTO = mapper.map(time, TimeDTO.class);
-//            timeDTO.add(tDTO);
-//        }
-        return null;
-    }
 
     @Override
     public TimeDTO insert(TimeDTO timeDTO) {
@@ -69,7 +59,13 @@ public class TimeServiceImpl implements TimeService {
     }
 
     @Override
-    public Long count() {
+    public Long count(ParamWrapper pw) {
+//        return dao.count(pw);
+        return null;
+    }
+
+    @Override
+    public List<TimeDTO> getAll(ParamWrapper pw, int offset, int limit) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
