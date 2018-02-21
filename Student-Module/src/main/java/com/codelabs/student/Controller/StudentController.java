@@ -5,9 +5,12 @@
  */
 package com.codelabs.student.Controller;
 
+import com.codelabs.core.DTO.Parameters;
+import com.codelabs.core.Wrapper.ParamWrapper;
 import com.codelabs.core.Wrapper.ResponseWrapper;
 import com.codelabs.student.DTO.StudentDTO;
 import com.codelabs.student.Service.StudentService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,6 +85,39 @@ public class StudentController {
     public ResponseEntity delete(@PathVariable("id") int id) {
         service.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/class/{classId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper<StudentDTO>> getStudentByClass(@PathVariable("classId") String classId, @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer limit) {
+        if (page == null || page == 0 || page < 1) {
+            page = 1;
+        }
+        if (limit == null || limit == 0 || limit > 25) {
+            limit = 25;
+        }
+        int offset = (page - 1) * limit;
+
+        //search criteria list       
+        List<Parameters> parameterList = new ArrayList<>();
+        parameterList.add(new Parameters("classId.classId", classId, 1));
+        //                  __
+        //                  ||
+        //                  ||
+        //                  ||
+        //                 \  /
+        //                  \/
+        ParamWrapper pw = new ParamWrapper(parameterList, 1);
+
+        ResponseWrapper wrapper = new ResponseWrapper();
+
+        wrapper.setData(service.getAll(pw, offset, limit));
+        wrapper.setPageSize(limit);
+        wrapper.setPageNo(page);
+        wrapper.setTotalItems(service.count(pw));
+        return new ResponseEntity<ResponseWrapper<StudentDTO>>(
+                wrapper,
+                HttpStatus.OK);
     }
 
 }
